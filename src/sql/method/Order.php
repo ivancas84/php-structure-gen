@@ -26,7 +26,7 @@ class ClassSql_order extends GenerateEntityRecursiveFk{
 
 
   protected function body(Entity $entity, $prefix){
-    $this->string .= "      \$cls = new {$entity->getName("XxYy")}Sql;
+    $this->string .= "      \$cls = EntitySql->getInstanceRequire('{$entity->getName()}');
       if(\$field = \$cls->_mappingField(\$key, '{$prefix}')){
         \$sql_ = \$this->_order(\$key, \$value);
         \$sql .= concat(\$sql_, ', ', ' ORDER BY', \$sql);
