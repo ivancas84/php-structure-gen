@@ -86,19 +86,15 @@ function doc(Entity $entity){
 }
 
 function sqlo(Entity $entity){
-    require_once("sqlo/Main.php");
-    $gen = new ClassSqloMain($entity);
-    $gen->generate();
-
     require_once("sqlo/Sqlo.php");
-    $gen = new ClassSqlo($entity);
-    $gen->generateIfNotExists();
+    $gen = new GenClassSqlo($entity);
+    $gen->generate();
   }
 
 function sql(Entity $entity){
     require_once("sql/Sql.php");
     $gen = new GenClassSql($entity);
-    $gen->generateIfNotExists();
+    $gen->generate();
 }
 
 function values(Entity $entity){
