@@ -1,7 +1,9 @@
 <?php
 
 require_once("../config/config.php");
+
 require_once("class/model/entity/structure.php");
+
 require_once("class/tools/Filter.php");
 
 $generate = Filter::get("gen");
@@ -24,7 +26,7 @@ foreach($structure as $entity) {
 		case "sql": sql($entity); break;
 		case "values": values($entity); break;
         
-        case null:
+        default:
         	controllerAll($entity);
 			controllerCount($entity);
 			controllerGetAll($entity);			
@@ -95,12 +97,8 @@ function sqlo(Entity $entity){
 
 function sql(Entity $entity){
     require_once("sql/Sql.php");
-    $gen = new GenerateClassSql($entity);
+    $gen = new GenClassSql($entity);
     $gen->generateIfNotExists();
-
-    require_once("sql/Main.php");
-    $gen = new GenerateClassSqlMain($entity);
-    $gen->generate();
 }
 
 function values(Entity $entity){

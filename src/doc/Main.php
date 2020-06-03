@@ -18,13 +18,13 @@ class Doc extends GenerateFileEntity {
   }
 
   protected function relations(){
-    require_once("phpdbgen/doc/Relations.php");
+    require_once("doc/Relations.php");
     $g = new Doc_relations($this->getEntity());
     $this->string .=  $g->generate();
   }
 
   protected function fields(){
-    require_once("phpdbgen/doc/Fields.php");
+    require_once("doc/Fields.php");
     $g = new Doc_fields($this->getEntity());
     $this->string .=  $g->generate();
   }

@@ -45,43 +45,43 @@ class _" . $this->getEntity()->getName("XxYy") . " extends EntityValues {
   }
 
   protected function setDefault(){
-    require_once("phpdbgen/values/setDefault.php");
+    require_once("values/setDefault.php");
     $g = new GenValues_setDefault($this->getEntity());
     $this->string .=  $g->generate();
   }
 
   protected function toArray(){
-    require_once("phpdbgen/values/toArray.php");
+    require_once("values/toArray.php");
     $g = new Values_toArray($this->getEntity());
     $this->string .=  $g->generate();
   }
 
   protected function isEmpty(){
-    require_once("phpdbgen/values/isEmpty.php");
+    require_once("values/isEmpty.php");
     $g = new Values_isEmpty($this->getEntity());
     $this->string .=  $g->generate();
   }
 
   protected function fromArray(){
-    require_once("phpdbgen/values/fromArray.php");
+    require_once("values/fromArray.php");
     $g = new ClassValues_fromArray($this->getEntity());
     $this->string .=  $g->generate();
   }
 
   protected function getters(){
-    require_once("phpdbgen/values/getters.php");
+    require_once("values/getters.php");
     $g = new ClassValues_getters($this->getEntity());
     $this->string .=  $g->generate();
   }
 
   protected function setters(){
-    require_once("phpdbgen/values/setters.php");
+    require_once("values/setters.php");
     $g = new ClassValues_setters($this->getEntity());
     $this->string .=  $g->generate();
   }
 
   protected function validators(){
-    require_once("phpdbgen/values/validators.php");
+    require_once("values/validators.php");
     $g = new ClassValues_validators($this->getEntity());
     $this->string .=  $g->generate();
   }
