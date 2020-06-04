@@ -45,38 +45,38 @@ foreach($structure as $entity) {
 
 function controllerAll(Entity $entity){
     require_once("controller/All.php");
-    $gen = new Gen_All($entity);
-    $gen->generateIfNotExists();
+    $gen = new GenControllerAll($entity);
+    $gen->generateIfNotExistsWithImp();
 }
 
 function controllerCount(Entity $entity){
     require_once("controller/Count.php");
-    $gen = new Gen_Count($entity);
-    $gen->generateIfNotExists();
+    $gen = new GenControllerCount($entity);
+    $gen->generateIfNotExistsWithImp();
 }
 
 function controllerGetAll(Entity $entity){
     require_once("controller/GetAll.php");
-    $gen = new Gen_GetAll($entity);
-    $gen->generateIfNotExists();
+    $gen = new GenControllerGetAll($entity);
+    $gen->generateIfNotExistsWithImp();
 }
 
 function controllerIds(Entity $entity){
     require_once("controller/Ids.php");
-    $gen = new Gen_Ids($entity);
-    $gen->generateIfNotExists();
+    $gen = new GenControllerIds($entity);
+    $gen->generateIfNotExistsWithImp();
 }
 
 function controllerUnique(Entity $entity){
     require_once("controller/Unique.php");
-    $gen = new Gen_Unique($entity);
-    $gen->generateIfNotExists();
+    $gen = new GenControllerUnique($entity);
+    $gen->generateIfNotExistsWithImp();
 }
 
 function controllerDisplayRender(Entity $entity){
     require_once("controller/DisplayRender.php");
-    $gen = new Gen_DisplayRender($entity);
-    $gen->generateIfNotExists();
+    $gen = new GenControllerDisplayRender($entity);
+    $gen->generateIfNotExistsWithImp();
 }
 
 function doc(Entity $entity){
@@ -98,11 +98,7 @@ function sql(Entity $entity){
 }
 
 function values(Entity $entity){
-    require_once("values/_Values.php");
-    $gen = new _ClassValues($entity);
-    $gen->generate();
-
     require_once("values/Values.php");
-    $gen = new ClassValues($entity);
-    $gen->generateIfNotExists();
+    $gen = new GenClassValues($entity);
+    $gen->generate();
 }

@@ -5,11 +5,11 @@ require_once("class/model/Entity.php");
 require_once("GenerateFileEntity.php");
 
 
-class Gen_GetAll extends GenerateFileEntity {
+class GenControllerGetAll extends GenerateFileEntity {
 
   public function __construct(Entity $entity) {
     $directorio = $_SERVER["DOCUMENT_ROOT"]."/".PATH_ROOT."/class/controller/getAll/";
-    $nombreArchivo = $entity->getName("XxYy").".php";
+    $nombreArchivo = "_".$entity->getName("XxYy").".php";
     parent::__construct($directorio, $nombreArchivo, $entity);
   }
 
@@ -18,7 +18,7 @@ class Gen_GetAll extends GenerateFileEntity {
 
 require_once(\"class/controller/GetAll.php\");
 
-class " . $this->getEntity()->getName("XxYy") . "GetAll extends GetAll {
+class _" . $this->getEntity()->getName("XxYy") . "GetAll extends GetAll {
   public \$entityName = \"" . $this->getEntity()->getName() . "\";
 }
 

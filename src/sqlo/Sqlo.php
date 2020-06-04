@@ -32,7 +32,7 @@ require_once(\"class/model/Sql.php\");
 require_once(\"class/model/Entity.php\");
 require_once(\"class/model/Values.php\");
 
-class _" . $this->getEntity()->getName("XxYy") . "SqloMain extends EntitySqlo {
+class _" . $this->getEntity()->getName("XxYy") . "Sqlo extends EntitySqlo {
 ";
   }
 

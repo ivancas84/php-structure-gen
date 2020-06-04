@@ -13,7 +13,7 @@ class ClassSql_values extends GenerateEntity {
 
   protected function start(){
     $this->string .= "  public function values(array \$json = NULL){
-    \$row_['{$this->entity->getAlias()}'] = new {$this->entity->getName('XxYy')}(\$json);
+    \$row_['{$this->entity->getAlias()}'] = EntityValues::getInstanceRequire('{$this->entity->getName('XxYy')}', \$json);
 ";
   }
 
@@ -32,7 +32,7 @@ class ClassSql_values extends GenerateEntity {
 
 
   protected function body(Entity $entity, $arrayName, $prefixField, $createArray = true){
-    $this->string .= "    \$row['{$prefixField}'] = new {$entity->getName('XxYy')}({$arrayName});
+    $this->string .= "    \$row['{$prefixField}'] = EntityValues::getInstanceRequire('{$entity->getName()}', {$arrayName});
 ";
   }
 
