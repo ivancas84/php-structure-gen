@@ -6,7 +6,7 @@ class GenClassSql extends GenerateFileEntity{
 
   public function __construct(Entity $entity) {
     $dir = $_SERVER["DOCUMENT_ROOT"]."/".PATH_ROOT."/class/model/sql/";
-    $name = "_" . $entity->getName("XxYy") . "Sql.php";
+    $name = "_" . $entity->getName("XxYy") . ".php";
     parent::__construct($dir, $name, $entity);
   }
 
@@ -30,7 +30,7 @@ class GenClassSql extends GenerateFileEntity{
     $this->string .= "<?php
 require_once(\"class/model/Sql.php\");
 
-class _" .  $this->getEntity()->getName("XxYy") . "SqlMain extends EntitySql{
+class _" .  $this->getEntity()->getName("XxYy") . "Sql extends EntitySql{
 
   public function __construct(){
     parent::__construct();
