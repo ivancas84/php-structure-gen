@@ -62,8 +62,8 @@ class _" .  $this->getEntity()->getName("XxYy") . "Sql extends EntitySql{
 
 
   protected function mappingField(){
-    require_once("sql/method/_MappingField.php");
-    $gen = new GenSql__mappingField($this->getEntity());
+    require_once("sql/method/_mappingField/_MappingField.php");
+    $gen = new GenSql_mappingField($this->getEntity());
     $this->string .= $gen->generate();
 
     require_once("sql/method/MappingField.php");
