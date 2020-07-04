@@ -15,6 +15,7 @@ class Doc extends GenerateFileEntity {
   protected function generateCode(){
     $this->relations();
     $this->fields();
+    $this->uniqueMultiple();
   }
 
   protected function relations(){
@@ -28,5 +29,17 @@ class Doc extends GenerateFileEntity {
     $g = new Doc_fields($this->getEntity());
     $this->string .=  $g->generate();
   }
+
+  protected function uniqueMultiple(){
+    
+    if(empty($fields = $this->getEntity()->getFieldsUniqueMultiple())) return "";
+    $func = function($field) {
+      return $field->getName();
+    };
+
+    $this->string .= "
+UNIQUE MULTIPLE: " . implode(", ", array_map($func, $fields));
+  }
+
 
 }

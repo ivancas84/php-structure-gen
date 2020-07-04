@@ -24,14 +24,4 @@ class Doc_fields extends GenerateEntity{
     
   }
 
-  protected function end(){
-    $this->string .= "";
-  }
-
-
-
-
-
-
-
 }
