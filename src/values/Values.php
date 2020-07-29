@@ -6,7 +6,7 @@ require_once("GenerateFileEntity.php");
 class GenClassValues extends GenerateFileEntity {
 
   public function __construct(Entity $entity) {
-    $directorio = $_SERVER["DOCUMENT_ROOT"]."/".PATH_ROOT."/class/model/values/";
+    $directorio = $_SERVER["DOCUMENT_ROOT"]."/".PATH_SRC."/class/model/values/";
     $nombreArchivo = "_" . $entity->getName("XxYy") . ".php";
     parent::__construct($directorio, $nombreArchivo, $entity);
   }
