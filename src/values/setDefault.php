@@ -26,10 +26,11 @@ class GenValues_setDefault extends GenerateEntity {
   }
 
   protected function end(){
-      $this->string .= "  }
+    $this->string .= "    return \$this;
+  }
 
 ";
-    }
+  }
 
 
 

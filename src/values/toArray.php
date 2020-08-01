@@ -23,10 +23,7 @@ class Values_toArray extends GenerateEntity {
     $pkNfFk = $this->getEntity()->getFields();
     foreach ( $pkNfFk as $field ) {
       switch($field->getDataType()){
-        case "date": $this->method($field, "Y-m-d"); break;
-        case "timestamp": $this->method($field, "Y-m-d H:i:s"); break;
-        case "time": $this->method($field, "H:i:s"); break;
-        case "year": $this->method($field, "Y"); break;      
+        case "date": case "timestamp": case "time": case "year":  $this->method($field, "c"); break;
         default: $this->method($field); break;
       }
     }
@@ -45,24 +42,16 @@ class Values_toArray extends GenerateEntity {
     $this->string .= "    if(\$this->{$field->getName('xxYy')} !== UNDEFINED) \$row[\"" . $field->getName() . "\"] = \$this->{$field->getName('xxYy')}({$f});
 "; 
   }
-    protected function datetime($field, $format){
-      $f = empty($format) ? "" : "\"{$format}\"";
-      $this->string .= "    if(\$this->{$field->getName('xxYy')} !== UNDEFINED) {
-        if(empty(\$this->{$field->getName('xxYy')})) \$row[\"" . $field->getName() . "\"] = \$this->{$field->getName('xxYy')};
-        else \$row[\"" . $field->getName() . "\"] = \$this->{$field->getName('xxYy')}->format({$f});
-      }
+    
+  protected function boolean($field){
+    $this->string .= "    if(\$this->{$field->getName('xxYy')} !== UNDEFINED) \$row[\"" . $field->getName() . "\"] = (\$this->{$field->getName('xxYy')}) ? true : false;        
 ";
-    }
+  }
 
-    protected function boolean($field){
-      $this->string .= "    if(\$this->{$field->getName('xxYy')} !== UNDEFINED) \$row[\"" . $field->getName() . "\"] = (\$this->{$field->getName('xxYy')}) ? true : false;        
+  protected function defecto($field){
+    $this->string .= "    if(\$this->{$field->getName('xxYy')} !== UNDEFINED) \$row[\"" . $field->getName() . "\"] = \$this->{$field->getName('xxYy')};
 ";
-    }
-
-    protected function defecto($field){
-      $this->string .= "    if(\$this->{$field->getName('xxYy')} !== UNDEFINED) \$row[\"" . $field->getName() . "\"] = \$this->{$field->getName('xxYy')};
-";
-    }
+  }
 
 
 }

@@ -32,6 +32,7 @@ class _" . $this->getEntity()->getName("XxYy") . " extends EntityValues {
     $this->setDefault();
     $this->fromArray();
     $this->toArray();
+    $this->toSql();
     $this->isEmpty();
 
     $this->getters();
@@ -56,17 +57,24 @@ class _" . $this->getEntity()->getName("XxYy") . " extends EntityValues {
     $this->string .=  $g->generate();
   }
 
+  protected function fromArray(){
+    require_once("values/fromArray.php");
+    $g = new ClassValues_fromArray($this->getEntity());
+    $this->string .=  $g->generate();
+  }
+
+  protected function toSql(){
+    require_once("values/toSql.php");
+    $g = new Values_toSql($this->getEntity());
+    $this->string .=  $g->generate();
+  }
+
   protected function isEmpty(){
     require_once("values/isEmpty.php");
     $g = new Values_isEmpty($this->getEntity());
     $this->string .=  $g->generate();
   }
 
-  protected function fromArray(){
-    require_once("values/fromArray.php");
-    $g = new ClassValues_fromArray($this->getEntity());
-    $this->string .=  $g->generate();
-  }
 
   protected function getters(){
     require_once("values/getters.php");

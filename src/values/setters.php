@@ -19,10 +19,10 @@ class ClassValues_setters extends GenerateEntity {
     foreach ( $pkNfFk as $field ) {
 
       switch($field->getDataType()){
-        case "year": $this->dateTime($field, 'Y'); break;
-        case "time": $this->dateTime($field, 'H:i:s'); break;
-        case "date": $this->date($field); break;
-        case "timestamp": $this->dateTime($field, 'Y-m-d H:i:s'); break;
+        case "year": $this->dateTime($field); break;
+        case "time": $this->dateTime($field); break;
+        case "date": $this->dateTime($field); break;
+        case "timestamp": $this->dateTime($field); break;
         case "integer": $this->integer($field); break;
         case "float": $this->float($field); break;
         case "boolean": $this->boolean($field); break;
@@ -101,7 +101,7 @@ class ClassValues_setters extends GenerateEntity {
 ";
   }
 
-  protected function dateTime(Field $field, $format){
+  protected function dateTime(Field $field){
     if(strpos(strtolower($field->getDefault()), "current") !== false){
       $default = "date('{$format}')";
     } else {
@@ -114,9 +114,10 @@ class ClassValues_setters extends GenerateEntity {
       return \$check;
   }
 
-  public function set{$field->getName('XxYy')}(\$p, \$format = \"{$format}\") {
+  public function set{$field->getName('XxYy')}(\$p) {
     \$p = (\$p == DEFAULT_VALUE) ? " . $default . " : trim(\$p);
-    if(!is_null(\$p)) \$p = SpanishDateTime::createFromFormat(\$format, \$p);    
+    if(!is_null(\$p)) \$p = new SpanishDateTime(\$p);    
+    if(\$p) \$p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
     \$check = \$this->check{$field->getName('XxYy')}(\$p); 
     if(\$check) \$this->{$field->getName('xxYy')} = \$p;  
     return \$check;
