@@ -32,12 +32,13 @@ class _" . $this->getEntity()->getName("XxYy") . " extends EntityValues {
     $this->setDefault();
     $this->fromArray();
     $this->toArray();
-    $this->toSql();
     $this->isEmpty();
 
     $this->getters();
     $this->setters();
     $this->validators();
+
+    $this->check();
   }
 
   protected function properties(){
@@ -63,18 +64,11 @@ class _" . $this->getEntity()->getName("XxYy") . " extends EntityValues {
     $this->string .=  $g->generate();
   }
 
-  protected function toSql(){
-    require_once("values/toSql.php");
-    $g = new Values_toSql($this->getEntity());
-    $this->string .=  $g->generate();
-  }
-
   protected function isEmpty(){
     require_once("values/isEmpty.php");
     $g = new Values_isEmpty($this->getEntity());
     $this->string .=  $g->generate();
   }
-
 
   protected function getters(){
     require_once("values/getters.php");
@@ -91,6 +85,12 @@ class _" . $this->getEntity()->getName("XxYy") . " extends EntityValues {
   protected function validators(){
     require_once("values/validators.php");
     $g = new ClassValues_validators($this->getEntity());
+    $this->string .=  $g->generate();
+  }
+
+  protected function check(){
+    require_once("values/check.php");
+    $g = new Values_check($this->getEntity());
     $this->string .=  $g->generate();
   }
 
