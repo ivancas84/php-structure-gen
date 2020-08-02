@@ -17,8 +17,6 @@ class GenClassSql extends GenerateFileEntity{
     $this->methodJoin();
     //$this->conditionSearch();
     $this->filters();
-    $this->initializeInsert();
-    $this->initializeUpdate();
     $this->format();
     $this->json(); //este metodo no coincide con la responsabilidad de la clase SQL pero por el momento se deja aqui hasta encontrar un lugar mas apropiado
     //$this->values(); este metodo transforma el resultado json en values, pero por el momento se descarta
@@ -126,18 +124,6 @@ class _" .  $this->getEntity()->getName("XxYy") . "Sql extends EntitySql{
   protected function order(){
     require_once("sql/method/Order.php");
     $gen = new ClassSql_order($this->getEntity());
-    $this->string .= $gen->generate();
-  }
-
-  protected function initializeInsert(){
-    require_once("sql/method/InitializeInsert.php");
-    $gen = new Sql_initializeInsert($this->getEntity());
-    $this->string .= $gen->generate();
-  }
-
-  protected function initializeUpdate(){
-    require_once("sql/method/InitializeUpdate.php");
-    $gen = new Sql_initializeUpdate($this->getEntity());
     $this->string .= $gen->generate();
   }
 
