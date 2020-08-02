@@ -40,13 +40,13 @@ class GenValues_setDefault extends GenerateEntity {
 
   protected function withoutQuotes($field){
     $default = ($field->getDefault()) ? $field->getDefault() : "null";
-    $this->string .= "    \$this->set{$field->getName('XxYy')}({$default});
+    $this->string .= "    if(\$this->{$field->getName('xxYy')} == UNDEFINED) \$this->set{$field->getName('XxYy')}({$default});
 ";
   }
   
   protected function withQuotes($field){
     $default = ($field->getDefault()) ? "'".$field->getDefault() . "'": "null";
-    $this->string .= "    \$this->set{$field->getName('XxYy')}({$default});
+    $this->string .= "    if(\$this->{$field->getName('xxYy')} == UNDEFINED) \$this->set{$field->getName('XxYy')}({$default});
 ";
   }
 
@@ -56,7 +56,7 @@ class GenValues_setDefault extends GenerateEntity {
     } else {
       $default = ($field->getDefault()) ? "'" . $field->getDefault() . "'" : "null";
     }
-    $this->string .= "    \$this->set{$field->getName('XxYy')}({$default});
+    $this->string .= "    if(\$this->{$field->getName('xxYy')} == UNDEFINED) \$this->set{$field->getName('XxYy')}({$default});
 ";
   }
 
