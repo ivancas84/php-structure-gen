@@ -12,7 +12,7 @@ class ClassValues_fromArray extends GenerateEntity {
   }
 
   protected function start(){
-    $this->string .= "  public function _fromArray(array \$row = NULL, \$p = \"\"){
+    $this->string .= "  public function _fromArray(array \$row = NULL, string \$p = \"\"){
     if(empty(\$row)) return;
 ";
   }
@@ -34,7 +34,8 @@ class ClassValues_fromArray extends GenerateEntity {
   }
 
   protected function end(){
-    $this->string .= "  }
+    $this->string .= "    return \$this;
+  }
 
 ";
   }
