@@ -17,8 +17,7 @@ class GenSql_mappingField_label extends GenerateEntityRecursiveFk{
 
 
   protected function start(){
-    $this->string .= "      case \$p.'_label': return \"CONCAT_WS(' ',
-";
+    $this->string .= "      case \$p.'_label': return \"CONCAT_WS(' ', ";
   }
 
   
@@ -32,13 +31,11 @@ class GenSql_mappingField_label extends GenerateEntityRecursiveFk{
   }
 
   protected function defineFields(){
-    $this->string .= implode(", 
-", $this->fields);
+    $this->string .= implode(", ", $this->fields);
   }
 
   protected function end(){
-      $this->string .= "
-)\";
+      $this->string .= ")\";
 ";
   }
 
