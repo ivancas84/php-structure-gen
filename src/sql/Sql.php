@@ -74,8 +74,8 @@ class _" .  $this->getEntity()->getName("XxYy") . "Sql extends EntitySql{
     $gen = new Sql__fields($this->getEntity());
     $this->string .= $gen->generate();
 
-    require_once("sql/method/fields/_FieldsDb.php");
-    $gen = new Sql__fieldsDb($this->getEntity());
+    require_once("sql/method/fields/_FieldsExclusive.php");
+    $gen = new Sql__fieldsExclusive($this->getEntity());
     $this->string .= $gen->generate();
 
     require_once("sql/method/fields/Fields.php");
