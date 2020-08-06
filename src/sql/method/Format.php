@@ -31,11 +31,11 @@ protected function start(){
     $field = $this->getEntity()->getPk();
     switch ( $field->getDataType()) {
       case "integer":
-        $this->string .= "    if(isset(\$row['" . $field->getName() . "']) ) \$row_['" . $field->getName() . "'] = \$this->format->positiveIntegerWithoutZerofill(\$row['" . $field->getName() . "']);
+        $this->string .= "    if(array_key_exists('{$field->getName()}', \$row)) \$row_['" . $field->getName() . "'] = \$this->format->positiveIntegerWithoutZerofill(\$row['" . $field->getName() . "']);
 ";
       break;
       case "text": case "string":
-        $this->string .= "   if(isset(\$row['" . $field->getName() . "']) )  \$row_['" . $field->getName() . "'] = \$this->format->escapeString(\$row['" . $field->getName() . "']);
+        $this->string .= "    if(array_key_exists('{$field->getName()}', \$row))  \$row_['" . $field->getName() . "'] = \$this->format->string(\$row['" . $field->getName() . "']);
 ";
       break;
 
@@ -49,12 +49,12 @@ protected function start(){
   protected function nf(Entity $entity){
     $nf = $entity->getFieldsNf();
 
-    //redefinir valores de timestamp y date. Los valores timestamp y date se dividen en diferentes partes correspondientes a dia mes anio hora minutos y segundos. Dichas partes deben unirse en una sola variable
+    //redefinir valores de timestamp y datetime. Los valores timestamp y datetime se dividen en diferentes partes correspondientes a dia mes anio hora minutos y segundos. Dichas partes deben unirse en una sola variable
     foreach ( $nf as $field ) {
       switch ( $field->getDataType()) {
         case "timestamp": $this->timestamp($field); break;
-        case "time":  $this->time($field); break;
         case "date": $this->date($field); break;
+        case "time": $this->time($field); break;
         case "year": $this->year($field); break;
         case "text": case "string": $this->string($field); break;
         case "integer": case "float": $this->number($field); break;
@@ -70,7 +70,7 @@ protected function start(){
 
   protected function integerNonZero(Field $field){
 
-    $this->string .= "    if(isset(\$row['" . $field->getName() . "']) ) \$row_['" . $field->getName() . "'] = \$this->format->positiveIntegerWithoutZerofill(\$row['" . $field->getName() . "']);
+    $this->string .= "    if(array_key_exists('{$field->getName()}', \$row)) \$row_['" . $field->getName() . "'] = \$this->format->positiveIntegerWithoutZerofill(\$row['" . $field->getName() . "']);
 ";
 
   }
@@ -78,39 +78,33 @@ protected function start(){
 
   protected function number(Field $field){
 
-    $this->string .= "    if(isset(\$row['" . $field->getName() . "'])) \$row_['" . $field->getName() . "'] = \$this->format->numeric(\$row['" . $field->getName() . "']);
+    $this->string .= "    if(array_key_exists('{$field->getName()}', \$row)) \$row_['" . $field->getName() . "'] = \$this->format->numeric(\$row['" . $field->getName() . "']);
 ";
 
   }
-
-
-
-  protected function timestamp(Field $field){
-
-    $this->string .= "    if(isset(\$row['" . $field->getName() . "'])) \$row_['" . $field->getName() . "'] = \$this->format->timestamp(\$row['" . $field->getName() . "']);
-";
-  }
-
-
-
-  protected function time(Field $field){
-    $this->string .= "    if(isset(\$row['" . $field->getName() . "'])) \$row_['" . $field->getName() . "'] = \$this->format->time(\$row['" . $field->getName() . "']);
-";
-
-  }
-
 
   protected function date(Field $field){
 
-    $this->string .= "    if(isset(\$row['" . $field->getName() . "'])) \$row_['" . $field->getName() . "'] = \$this->format->date(\$row['" . $field->getName() . "']);
+    $this->string .= "    if(array_key_exists('{$field->getName()}', \$row)) \$row_['" . $field->getName() . "'] = \$this->format->date(\$row['" . $field->getName() . "']);
 ";
+  }
 
+  protected function time(Field $field){
+
+    $this->string .= "    if(array_key_exists('{$field->getName()}', \$row)) \$row_['" . $field->getName() . "'] = \$this->format->time(\$row['" . $field->getName() . "']);
+";
+  }
+
+  protected function timestamp(Field $field){
+
+    $this->string .= "    if(array_key_exists('{$field->getName()}', \$row)) \$row_['" . $field->getName() . "'] = \$this->format->timestamp(\$row['" . $field->getName() . "']);
+";
   }
 
 
 
   protected function year(Field $field){
-    $this->string .= "    if(isset(\$row['" . $field->getName() . "'])) \$row_['" . $field->getName() . "'] = \$this->format->year(\$row['" . $field->getName() . "']);
+    $this->string .= "    if(array_key_exists('{$field->getName()}', \$row)) \$row_['" . $field->getName() . "'] = \$this->format->year(\$row['" . $field->getName() . "']);
 ";
 
   }
@@ -122,7 +116,7 @@ protected function start(){
 
   protected function string(Field $field){
 
-      $this->string .= "    if(isset(\$row['" . $field->getName() . "'])) \$row_['" . $field->getName() . "'] = \$this->format->escapeString(\$row['" . $field->getName() . "']);
+      $this->string .= "    if(array_key_exists('{$field->getName()}', \$row)) \$row_['" . $field->getName() . "'] = \$this->format->string(\$row['" . $field->getName() . "']);
 ";
 
 
@@ -132,7 +126,7 @@ protected function start(){
 
   protected function boolean(Field $field){
 
-    $this->string .= "    if(isset(\$row['" . $field->getName() . "'])) \$row_['" . $field->getName() . "'] = \$this->format->boolean(\$row['" . $field->getName() . "']);
+    $this->string .= "    if(array_key_exists('{$field->getName()}', \$row)) \$row_['" . $field->getName() . "'] = \$this->format->boolean(\$row['" . $field->getName() . "']);
 ";
   }
 
