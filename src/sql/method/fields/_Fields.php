@@ -9,13 +9,6 @@ class Sql__fields extends GenerateEntity {
     return $this->string;
   }
 
-
-
-
-
-
-
-
   protected function start(){
     $this->string .= "  public function _fields(){
     //No todos los campos se extraen de la entidad, por eso es necesario mapearlos
@@ -23,7 +16,6 @@ class Sql__fields extends GenerateEntity {
     return '
 ";
   }
-
 
   /**
   * Generar sql distinct fields
@@ -37,7 +29,6 @@ class Sql__fields extends GenerateEntity {
 
     $fields = ["' . \$this->_mappingField(\$p.'{$this->getEntity()->getPk()->getName()}') . ' AS ' . \$p.'{$this->getEntity()->getPk()->getName()}"];
     foreach ( $nfFk as $field ) {
-      if($field->isHidden()) continue;
       array_push($fields, "' . \$this->_mappingField(\$p.'{$field->getName()}') . ' AS ' . \$p.'{$field->getName()}");
     }
 

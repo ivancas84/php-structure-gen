@@ -38,8 +38,6 @@ class ClassSql__json extends GenerateEntity {
   protected function nf(){
     $pkNfFk = $this->getEntity()->getFieldsNf();
     foreach ( $pkNfFk as $field ) {
-      if ($field->isHidden()) continue;
-
       switch($field->getDataType()) {
         case "integer": $this->string .= "    \$row_[\"" . $field->getName(). "\"] = (is_null(\$row[\$prefix . \"" . $field->getName() . "\"])) ? null : intval(\$row[\$prefix . \"" . $field->getName() . "\"]);
 ";
