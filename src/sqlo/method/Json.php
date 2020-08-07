@@ -15,7 +15,7 @@ class Sqlo_json extends GenerateEntity {
   protected function start(){
     $this->string .= "  public function json(array \$row = null){
     if(empty(\$row)) return null;
-    \$row_ = \$this->sql->_json(\$row);
+    \$row_ = EntityValues::getInstanceRequire(\$this->entity->getName())->_fromArray(\$row)->_toArray();
 ";
   }
 
@@ -34,10 +34,7 @@ class Sqlo_json extends GenerateEntity {
   }
 
   protected function body(Entity $entity, $arrayName, $prefix){
-    $this->string .= "    if(!is_null(\$row['{$prefix}_id'])){
-      \$json = EntitySql::getInstanceRequire('{$entity->getName()}', '{$prefix}')->_json(\$row);
-      " . $arrayName . " = \$json;
-    }
+    $this->string .= "    if(!is_null(\$row['{$prefix}_id'])) " . $arrayName . " = EntityValues::getInstanceRequire('{$entity->getName()}')->_fromArray(\$row, '{$prefix}_')->_toArray();
 ";
   }
 
@@ -58,7 +55,4 @@ class Sqlo_json extends GenerateEntity {
 
 ";
     }
-
-
-
 }
