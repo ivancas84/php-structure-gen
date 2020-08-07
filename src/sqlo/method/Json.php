@@ -34,9 +34,7 @@ class Sqlo_json extends GenerateEntity {
   }
 
   protected function body(Entity $entity, $arrayName, $prefix){
-    $this->string .= "    if(!is_null(\$row['{$prefix}_id'])){
-      " . $arrayName . " = EntityValues::getInstanceRequire('{$entity->getName()}')->_fromArray(\$row, '{$prefix}_')->_toArray();
-    }
+    $this->string .= "    if(!is_null(\$row['{$prefix}_id'])) " . $arrayName . " = EntityValues::getInstanceRequire('{$entity->getName()}')->_fromArray(\$row, '{$prefix}_')->_toArray();
 ";
   }
 
