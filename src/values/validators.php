@@ -21,7 +21,7 @@ class ClassValues_validators extends GenerateEntity {
     $r = ($field->isNotNull()) ? "->required()" : "";
     $this->string .= "  public function check{$field->getName('XxYy')}(\$value) { 
     \$this->_logs->resetLogs(\"{$field->getName()}\");
-    if(Validation::is_undefined(\$value) return null;
+    if(Validation::is_undefined(\$value)) return null;
     \$v = Validation::getInstanceValue(\$value)->{$method}(){$r};
     foreach(\$v->getErrors() as \$error){ \$this->_logs->addLog(\"{$field->getName()}\", \"error\", \$error); }
     return \$v->isSuccess();
@@ -36,7 +36,7 @@ class ClassValues_validators extends GenerateEntity {
 
   protected function success(Field $field){
     $this->string .= "  public function check{$field->getName('XxYy')}(\$value) { 
-      if(Validation::is_undefined(\$value) return null;
+      if(Validation::is_undefined(\$value)) return null;
       return true; 
   }
 
@@ -46,7 +46,7 @@ class ClassValues_validators extends GenerateEntity {
   protected function notNull(Field $field){
     $this->string .= "  public function check{$field->getName('XxYy')}(\$value) { 
     \$this->_logs->resetLogs(\"{$field->getName()}\");
-    if(Validation::is_undefined(\$value) return null;
+    if(Validation::is_undefined(\$value)) return null;
     \$v = Validation::getInstanceValue(\$value)->required();
     foreach(\$v->getErrors() as \$error){ \$this->_logs->addLog(\"{$field->getName()}\", \"error\", \$error); }
     return \$v->isSuccess();
