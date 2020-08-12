@@ -45,7 +45,7 @@ class GenValues_setDefault extends GenerateEntity {
   }
   
   protected function withQuotes($field){
-    $default = ($field->getDefault()) ? "'".$field->getDefault() . "'": "null";
+    $default = ($field->getDefault()) ? "".$field->getDefault() . "": "null";
     $this->string .= "    if(\$this->{$field->getName('xxYy')} == UNDEFINED) \$this->set{$field->getName('XxYy')}({$default});
 ";
   }

@@ -8,6 +8,8 @@ class ClassValues_setters extends GenerateEntity {
     $this->pk();
     $this->nf();
     $this->fk();
+    $this->string .= "
+";
     return $this->string;
   }
 
@@ -48,30 +50,26 @@ class ClassValues_setters extends GenerateEntity {
   protected function integer(Field $field){
     $default = ($field->getDefault()) ? $field->getDefault() : "null";
     
-    $this->string .= "  public function set{$field->getName('XxYy')}(\$p) { \$this->{$field->getName('xxYy')} = (is_null(\$p)) ? null : intval(trim(\$p)); }
-
+    $this->string .= "  public function set{$field->getName('XxYy')}(\$p) { \$this->{$field->getName('xxYy')} = (is_null(\$p)) ? null : intval(\$p); }
 ";
   }
 
   protected function float(Field $field){
     $default = ($field->getDefault()) ? $field->getDefault() : "null";
 
-    $this->string .= "  public function set{$field->getName('XxYy')}(\$p) { \$this->{$field->getName('xxYy')} = (is_null(\$p)) ? null : floatval(trim(\$p)); }
-
+    $this->string .= "  public function set{$field->getName('XxYy')}(\$p) { \$this->{$field->getName('xxYy')} = (is_null(\$p)) ? null : floatval(\$p); }
 ";
   }
 
   protected function boolean(Field $field){
     $default = ($field->getDefault()) ? $field->getDefault() : "null";
 
-    $this->string .= "  public function set{$field->getName('XxYy')}(\$p) { \$this->{$field->getName('xxYy')} = settypebool(trim(\$p)); }
-
+    $this->string .= "  public function set{$field->getName('XxYy')}(\$p) { \$this->{$field->getName('xxYy')} = settypebool(\$p); }
 ";
   }
 
   protected function defecto(Field $field){
     $this->string .= "  public function set{$field->getName('XxYy')}(\$p) { \$this->{$field->getName('xxYy')} = (is_null(\$p)) ? null : (string)\$p; }
-
 ";
   }
 

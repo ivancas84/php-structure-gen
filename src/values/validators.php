@@ -11,11 +11,6 @@ class ClassValues_validators extends GenerateEntity {
     foreach ( $pkNfFk as $field ) {
 
       switch($field->getDataType()){
-        case "integer": $this->checkMethod($field, "integer"); break;
-        case "float": $this->checkMethod($field, "float"); break;
-        case "date": case "time": case "year": case "timestamp": $this->checkMethod($field, "date"); break;
-        case "boolean": $this->checkMethod($field, "boolean"); break;
-        case "string": case "text": $this->checkMethod($field, "string"); break;
         default: $this->defecto($field);
       }
     }
@@ -25,8 +20,11 @@ class ClassValues_validators extends GenerateEntity {
   protected function checkMethod($field, $method){
     $r = ($field->isNotNull()) ? "->required()" : "";
     $this->string .= "  public function check{$field->getName('XxYy')}(\$value) { 
+    \$this->_logs->resetLogs(\"{$field->getName()}\");
+    if(Validation::is_undefined(\$value)) return null;
     \$v = Validation::getInstanceValue(\$value)->{$method}(){$r};
-    return \$this->_setLogsValidation(\"{$field->getName()}\", \$v);
+    foreach(\$v->getErrors() as \$error){ \$this->_logs->addLog(\"{$field->getName()}\", \"error\", \$error); }
+    return \$v->isSuccess();
   }
 
 ";
@@ -38,6 +36,7 @@ class ClassValues_validators extends GenerateEntity {
 
   protected function success(Field $field){
     $this->string .= "  public function check{$field->getName('XxYy')}(\$value) { 
+      if(Validation::is_undefined(\$value)) return null;
       return true; 
   }
 
@@ -46,8 +45,11 @@ class ClassValues_validators extends GenerateEntity {
 
   protected function notNull(Field $field){
     $this->string .= "  public function check{$field->getName('XxYy')}(\$value) { 
+    \$this->_logs->resetLogs(\"{$field->getName()}\");
+    if(Validation::is_undefined(\$value)) return null;
     \$v = Validation::getInstanceValue(\$value)->required();
-    return \$this->_setLogsValidation(\"{$field->getName()}\", \$v);
+    foreach(\$v->getErrors() as \$error){ \$this->_logs->addLog(\"{$field->getName()}\", \"error\", \$error); }
+    return \$v->isSuccess();
   }
 
 ";
