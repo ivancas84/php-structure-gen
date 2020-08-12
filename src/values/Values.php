@@ -36,9 +36,12 @@ class _" . $this->getEntity()->getName("XxYy") . " extends EntityValues {
 
     $this->getters();
     $this->setters();
+    $this->resetters();
     $this->validators();
 
     $this->check();
+    $this->reset();
+
   }
 
   protected function properties(){
@@ -82,6 +85,12 @@ class _" . $this->getEntity()->getName("XxYy") . " extends EntityValues {
     $this->string .=  $g->generate();
   }
 
+  protected function resetters(){
+    require_once("values/resetters.php");
+    $g = new GenValues_resetters($this->getEntity());
+    $this->string .=  $g->generate();
+  }
+
   protected function validators(){
     require_once("values/validators.php");
     $g = new ClassValues_validators($this->getEntity());
@@ -91,6 +100,12 @@ class _" . $this->getEntity()->getName("XxYy") . " extends EntityValues {
   protected function check(){
     require_once("values/check.php");
     $g = new Values_check($this->getEntity());
+    $this->string .=  $g->generate();
+  }
+
+  protected function reset(){
+    require_once("values/reset.php");
+    $g = new GenValues_reset($this->getEntity());
     $this->string .=  $g->generate();
   }
 
