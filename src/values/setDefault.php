@@ -1,5 +1,6 @@
 <?php
 
+require_once("function/settypebool.php");
 class GenValues_setDefault extends GenerateEntity {
   public function generate(){
     $this->start();
@@ -21,12 +22,11 @@ class GenValues_setDefault extends GenerateEntity {
 
     foreach ( $pkNfFk as $field ) {
       switch($field->getDataType()){
+        case "boolean": $this->boolean($field); break;
         case "date": case "timestamp": case "year": case "time": $this->datetime($field); break; 
         case "integer": $this->withoutQuotes($field); break;
         default: $this->withQuotes($field); break;
       }
-      
-      
     }
   }
 
@@ -34,6 +34,17 @@ class GenValues_setDefault extends GenerateEntity {
     $this->string .= "    return \$this;
   }
 
+";
+  }
+
+  
+  protected function boolean($field){
+    if(!is_null($field->getDefault())){
+      $default =  settypebool($field->getDefault()) ? "true" : "false";
+    } else {
+      $default = "null";
+    }
+    $this->string .= "    if(\$this->{$field->getName('xxYy')} == UNDEFINED) \$this->set{$field->getName('XxYy')}({$default});
 ";
   }
 
@@ -59,9 +70,5 @@ class GenValues_setDefault extends GenerateEntity {
     $this->string .= "    if(\$this->{$field->getName('xxYy')} == UNDEFINED) \$this->set{$field->getName('XxYy')}({$default});
 ";
   }
-
-
-  
-
 
 }
