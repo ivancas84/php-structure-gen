@@ -25,7 +25,7 @@ class ClassValues_setters extends GenerateEntity {
       switch($field->getDataType()){
         case "year": $this->dateTime($field); break;
         case "time": $this->dateTime($field); break;
-        case "date": $this->dateTime($field); break;
+        case "date": $this->date($field); break;
         case "timestamp": $this->dateTime($field); break;
         case "integer": $this->integer($field); break;
         case "float": $this->float($field); break;
@@ -70,6 +70,21 @@ class ClassValues_setters extends GenerateEntity {
 
   protected function defecto(Field $field){
     $this->string .= "  public function set{$field->getName('XxYy')}(\$p) { \$this->{$field->getName('xxYy')} = (is_null(\$p)) ? null : (string)\$p; }
+";
+  }
+
+  protected function date(Field $field){
+    $this->string .= "  public function _set{$field->getName('XxYy')}(DateTime \$p = null) { \$this->{$field->getName('xxYy')} = \$p; }
+
+  public function set{$field->getName('XxYy')}(\$p) {
+    if(!is_null(\$p)) {
+      \$p = new SpanishDateTime(\$p);
+      if(\$p) \$p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+      \$p->setTime(0,0,0);
+    }
+    \$this->{$field->getName('xxYy')} = \$p;
+  }
+
 ";
   }
 

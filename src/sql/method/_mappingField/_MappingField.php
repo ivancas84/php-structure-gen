@@ -30,6 +30,12 @@ class GenSql_mappingField extends GenerateEntity{
     foreach ($this->getEntity()->getFields() as $field){
       $this->string .= "      case \$p.'" . $field->getName() . "': return \$t.\"." . $field->getName() . "\";
 ";
+      switch($field->getDataType()){
+        case "timestamp": 
+          $this->string .= "      case \$p.'" . $field->getName() . "_date': return \"CAST({\$t}." . $field->getName() . " AS DATE)\";
+";  
+        break;
+      }
     }
   }
 

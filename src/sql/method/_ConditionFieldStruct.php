@@ -107,6 +107,7 @@ class ClassSql__conditionFieldStruct extends GenerateEntity{
 
   protected function timestamp($fieldName) {
     $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionTimestamp(\$f, \$value, \$option);
+      case \"{\$p}" . $fieldName . "_date\": return \$this->format->conditionDate(\$f, \$value, \$option);
 " ;
   }
 
