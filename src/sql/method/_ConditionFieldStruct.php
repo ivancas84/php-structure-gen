@@ -18,7 +18,6 @@ class ClassSql__conditionFieldStruct extends GenerateEntity{
     $this->string .= "  public function _conditionFieldStruct(\$field, \$option, \$value){
     \$p = \$this->prf();
 
-    \$f = \$this->_mappingField(\$field);
     switch (\$field){
 ";
   }
@@ -91,32 +90,44 @@ class ClassSql__conditionFieldStruct extends GenerateEntity{
   }
 
   protected function string($fieldName) {
-    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionText(\$f, \$value, \$option);
+    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionText(\$this->_mappingField(\$field), \$value, \$option);
+      case \"{\$p}" . $fieldName . "_is_set\": return \$this->format->conditionIsSet(\$this->_mappingField(\"{\$p}" . $fieldName . "\"), \$value, \$option);
+
 " ;
   }
 
   protected function number($fieldName) {
-    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionNumber(\$f, \$value, \$option);
+    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionNumber(\$this->_mappingField(\$field), \$value, \$option);
+      case \"{\$p}" . $fieldName . "_is_set\": return \$this->format->conditionIsSet(\$this->_mappingField(\"{\$p}" . $fieldName . "\"), \$value, \$option);
+
 " ;
 	}
 
   protected function date($fieldName) {
-    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionDate(\$f, \$value, \$option);
+    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionDate(\$this->_mappingField(\$field), \$value, \$option);
+      case \"{\$p}" . $fieldName . "_is_set\": return \$this->format->conditionIsSet(\$this->_mappingField(\"{\$p}" . $fieldName . "\"), \$value, \$option);
+
 " ;
   }
 
   protected function timestamp($fieldName) {
-    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionTimestamp(\$f, \$value, \$option);
-      case \"{\$p}" . $fieldName . "_date\": return \$this->format->conditionDate(\$f, \$value, \$option);
+    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionTimestamp(\$this->_mappingField(\$field), \$value, \$option);
+      case \"{\$p}" . $fieldName . "_date\": return \$this->format->conditionDate(\$this->_mappingField(\$field), \$value, \$option);
+      case \"{\$p}" . $fieldName . "_is_set\": return \$this->format->conditionIsSet(\$this->_mappingField(\"{\$p}" . $fieldName . "\"), \$value, \$option);
+
 " ;
   }
 
   protected function time($fieldName) {
-    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionTime(\$f, \$value, \$option);
+    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionTime(\$this->_mappingField(\$field), \$value, \$option);
+    case \"{\$p}" . $fieldName . "_is_set\": return \$this->format->conditionIsSet(\$this->_mappingField(\"{\$p}" . $fieldName . "\"), \$value, \$option);
+
 " ;
   }
   protected function boolean($fieldName) {
-    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionBoolean(\$f, \$value);
+    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionBoolean(\$this->_mappingField(\$field), \$value);
+    case \"{\$p}" . $fieldName . "_is_set\": return \$this->format->conditionIsSet(\$this->_mappingField(\"{\$p}" . $fieldName . "\"), \$value, \$option);
+
 " ;
   }
 
