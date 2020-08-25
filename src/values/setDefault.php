@@ -4,6 +4,7 @@ require_once("function/settypebool.php");
 class GenValues_setDefault extends GenerateEntity {
   public function generate(){
     $this->start();
+    $this->pk();
     $this->body();
     $this->end();
 
@@ -16,11 +17,13 @@ class GenValues_setDefault extends GenerateEntity {
 ";
   }
 
+  public function pk(){
+    $this->string .= "    if(\$this->id == UNDEFINED) \$this->setId(uniqid());
+";
+  }
 
   public function body(){
-    $pkNfFk = $this->getEntity()->getFields();
-
-    foreach ( $pkNfFk as $field ) {
+    foreach ( $this->getEntity()->getFieldsByType(["nf", "fk"]) as $field ) {
       switch($field->getDataType()){
         case "boolean": $this->boolean($field); break;
         case "date": case "timestamp": case "year": case "time": $this->datetime($field); break; 
