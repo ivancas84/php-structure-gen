@@ -9,6 +9,7 @@ class Doc_fields extends GenerateEntity{
 
   public function generate(){
     foreach($this->getEntity()->getFields() as $field) {
+     
       $this->string .= $field->getName() . " ({$field->getAlias()}): {$field->getDataType()} {$field->getFieldType()}.";
       if($field->isNotNull()) $this->string .= " NOT NULL."; 
       if($field->isMain()) $this->string .= " MAIN.";

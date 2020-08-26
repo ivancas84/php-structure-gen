@@ -29,12 +29,6 @@ require_once(\"class/model/Sql.php\");
 
 class _" .  $this->getEntity()->getName("XxYy") . "Sql extends EntitySql{
 
-  public function __construct(){
-    parent::__construct();
-    \$this->entity = Entity::getInstanceRequire('{$this->getEntity()->getName()}');
-  }
-
-
 ";
   }
 
