@@ -36,7 +36,7 @@ class ClassSql_join extends GenerateEntity {
       $prefixTemp = $prefixAux . $field->getAlias();
 
 
-        $this->string .= "EntitySql::getInstanceRequire('{$field->getEntityRef()->getName()}', '{$prefixTemp}')->_join('{$field->getName()}', '{$tableAux}', \$render) . '
+        $this->string .= "\$this->container->getSql('{$field->getEntityRef()->getName()}', '{$prefixTemp}')->_join('{$field->getName()}', '{$tableAux}', \$render) . '
 ' . ";
 
       if(!in_array($field->getEntityRef()->getName(), $tablesVisited)) {
