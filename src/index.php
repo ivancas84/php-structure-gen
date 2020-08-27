@@ -10,13 +10,12 @@ $generate = Filter::get("gen");
 
 foreach($structure as $entity) {
     switch($generate){
-        //controllers
-        case "controller_all": controllerAll($entity); break;
-		case "controller_count": controllerCount($entity); break;
-		case "controller_get_all": controllerGetAll($entity); break;
-		case "controller_ids": controllerIds($entity); break;
-		case "controller_unique": controllerUnique($entity); break;
-		case "controller_display_render": controllerDisplayRender($entity); break;
+        //apis
+        case "api_all": apiAll($entity); break;
+		case "api_count": apiCount($entity); break;
+		case "api_get_all": apiGetAll($entity); break;
+		case "api_ids": apiIds($entity); break;
+		case "api_unique": apiUnique($entity); break;
 
 		//doc
 		case "doc": doc($entity); break;
@@ -27,12 +26,11 @@ foreach($structure as $entity) {
 		case "values": values($entity); break;
         
         default:
-        	controllerAll($entity);
-			controllerCount($entity);
-			controllerGetAll($entity);			
-			controllerIds($entity);			
-			controllerUnique($entity);			
-			controllerDisplayRender($entity);
+        	apiAll($entity);
+			apiCount($entity);
+			apiGetAll($entity);			
+			apiIds($entity);			
+			apiUnique($entity);			
 			
 			doc($entity);
 			
@@ -43,41 +41,36 @@ foreach($structure as $entity) {
     }
 }
 
-function controllerAll(Entity $entity){
-    require_once("controller/All.php");
+function apiAll(Entity $entity){
+    require_once("api/All.php");
     $gen = new GenControllerAll($entity);
     $gen->generateIfNotExistsWithImp();
 }
 
-function controllerCount(Entity $entity){
-    require_once("controller/Count.php");
+function apiCount(Entity $entity){
+    require_once("api/Count.php");
     $gen = new GenControllerCount($entity);
     $gen->generateIfNotExistsWithImp();
 }
 
-function controllerGetAll(Entity $entity){
-    require_once("controller/GetAll.php");
+function apiGetAll(Entity $entity){
+    require_once("api/GetAll.php");
     $gen = new GenControllerGetAll($entity);
     $gen->generateIfNotExistsWithImp();
 }
 
-function controllerIds(Entity $entity){
-    require_once("controller/Ids.php");
+function apiIds(Entity $entity){
+    require_once("api/Ids.php");
     $gen = new GenControllerIds($entity);
     $gen->generateIfNotExistsWithImp();
 }
 
-function controllerUnique(Entity $entity){
-    require_once("controller/Unique.php");
+function apiUnique(Entity $entity){
+    require_once("api/Unique.php");
     $gen = new GenControllerUnique($entity);
     $gen->generateIfNotExistsWithImp();
 }
 
-function controllerDisplayRender(Entity $entity){
-    require_once("controller/DisplayRender.php");
-    $gen = new GenControllerDisplayRender($entity);
-    $gen->generateIfNotExistsWithImp();
-}
 
 function doc(Entity $entity){
     require_once("doc/Main.php");

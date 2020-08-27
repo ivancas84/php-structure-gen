@@ -5,10 +5,10 @@ require_once("class/model/Entity.php");
 require_once("GenerateFileEntity.php");
 
 
-class GenControllerDisplayRender extends GenerateFileEntity {
+class GenControllerCount extends GenerateFileEntity {
 
   public function __construct(Entity $entity) {
-    $directorio = $_SERVER["DOCUMENT_ROOT"]."/".PATH_SRC."/class/controller/displayRender/";
+    $directorio = $_SERVER["DOCUMENT_ROOT"]."/".PATH_SRC."/class/api/count/";
     $nombreArchivo = "_".$entity->getName("XxYy").".php";
     parent::__construct($directorio, $nombreArchivo, $entity);
   }
@@ -16,9 +16,9 @@ class GenControllerDisplayRender extends GenerateFileEntity {
   protected function generateCode() {
     $this->string .= "<?php
 
-require_once(\"class/controller/DisplayRender.php\");
+require_once(\"class/api/Count.php\");
 
-class _" . $this->getEntity()->getName("XxYy") . "DisplayRender extends DisplayRender {
+class _" . $this->getEntity()->getName("XxYy") . "Count extends Count {
   public \$entityName = \"" . $this->getEntity()->getName() . "\";
 }
 
