@@ -18,7 +18,7 @@ class GenControllerCount extends GenerateFileEntity {
 
 require_once(\"class/api/Count.php\");
 
-class _" . $this->getEntity()->getName("XxYy") . "Count extends Count {
+class _" . $this->getEntity()->getName("XxYy") . "CountApi extends CountApi {
   public \$entityName = \"" . $this->getEntity()->getName() . "\";
 }
 

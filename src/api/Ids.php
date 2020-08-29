@@ -18,7 +18,7 @@ class GenControllerIds extends GenerateFileEntity {
 
 require_once(\"class/api/Ids.php\");
 
-class _" . $this->getEntity()->getName("XxYy") . "Ids extends Ids {
+class _" . $this->getEntity()->getName("XxYy") . "IdsApi extends IdsApi {
   public \$entityName = \"" . $this->getEntity()->getName() . "\";
 }
 

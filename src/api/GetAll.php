@@ -18,7 +18,7 @@ class GenControllerGetAll extends GenerateFileEntity {
 
 require_once(\"class/api/GetAll.php\");
 
-class _" . $this->getEntity()->getName("XxYy") . "GetAll extends GetAll {
+class _" . $this->getEntity()->getName("XxYy") . "GetAllApi extends GetAllApi {
   public \$entityName = \"" . $this->getEntity()->getName() . "\";
 }
 

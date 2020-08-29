@@ -18,7 +18,7 @@ class GenControllerUnique extends GenerateFileEntity {
 
 require_once(\"class/api/Unique.php\");
 
-class _" . $this->getEntity()->getName("XxYy") . "Unique extends Unique {
+class _" . $this->getEntity()->getName("XxYy") . "UniqueApi extends UniqueApi {
   public \$entityName = \"" . $this->getEntity()->getName() . "\";
 }
 
