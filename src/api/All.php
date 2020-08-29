@@ -5,10 +5,10 @@ require_once("class/model/Entity.php");
 require_once("GenerateFileEntity.php");
 
 
-class GenControllerUnique extends GenerateFileEntity {
+class GenControllerAll extends GenerateFileEntity {
 
   public function __construct(Entity $entity) {
-    $directorio = $_SERVER["DOCUMENT_ROOT"]."/".PATH_SRC."/class/controller/unique/";
+    $directorio = $_SERVER["DOCUMENT_ROOT"]."/".PATH_SRC."/class/api/all/";
     $nombreArchivo = "_".$entity->getName("XxYy").".php";
     parent::__construct($directorio, $nombreArchivo, $entity);
   }
@@ -16,9 +16,9 @@ class GenControllerUnique extends GenerateFileEntity {
   protected function generateCode() {
     $this->string .= "<?php
 
-require_once(\"class/controller/Unique.php\");
+require_once(\"class/api/All.php\");
 
-class _" . $this->getEntity()->getName("XxYy") . "Unique extends Unique {
+class _" . $this->getEntity()->getName("XxYy") . "AllApi extends AllApi {
   public \$entityName = \"" . $this->getEntity()->getName() . "\";
 }
 
