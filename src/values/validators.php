@@ -11,7 +11,8 @@ class ClassValues_validators extends GenerateEntity {
     foreach ( $pkNfFk as $field ) {
 
       switch($field->getDataType()){
-        default: $this->defecto($field);
+        case "date": case "timestamp": case "year": case "time": $this->checkMethod2($field, ["isA('DateTime')"]); break;
+        default: $this->checkMethod2($field);
       }
     }
     return $this->string;  
@@ -38,6 +39,36 @@ class ClassValues_validators extends GenerateEntity {
     $this->string .= "  public function check{$field->getName('XxYy')}(\$value) { 
       if(Validation::is_undefined(\$value)) return null;
       return true; 
+  }
+
+";
+  }
+
+  
+  protected function checkMethod2($field, array $methods = []){
+    if ($field->isNotNull()) array_unshift($methods, "required()"); //required debe chequearse primero
+    if(empty($methods)) return $this->success($field);
+
+    $this->string .= "  public function check{$field->getName('XxYy')}(\$value) { 
+    \$this->_logs->resetLogs(\"{$field->getName()}\");
+    if(Validation::is_undefined(\$value)) return null;
+    \$v = Validation::getInstanceValue(\$value)->" . implode("->", $methods). ";
+    foreach(\$v->getErrors() as \$error){ \$this->_logs->addLog(\"{$field->getName()}\", \"error\", \$error); }
+    return \$v->isSuccess();
+  }
+
+";
+  }
+
+  protected function date(Field $field){
+    $methods = array("isA('DateTime')");
+    if ($field->isNotNull()) array_push($methods, "required()");
+    $this->string .= "  public function check{$field->getName('XxYy')}(\$value) { 
+    \$this->_logs->resetLogs(\"{$field->getName()}\");
+    if(Validation::is_undefined(\$value)) return null;
+    \$v = Validation::getInstanceValue(\$value)->required();
+    foreach(\$v->getErrors() as \$error){ \$this->_logs->addLog(\"{$field->getName()}\", \"error\", \$error); }
+    return \$v->isSuccess();
   }
 
 ";
