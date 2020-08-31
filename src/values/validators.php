@@ -11,29 +11,13 @@ class ClassValues_validators extends GenerateEntity {
     foreach ( $pkNfFk as $field ) {
 
       switch($field->getDataType()){
-        case "date": case "timestamp": case "year": case "time": $this->checkMethod2($field, ["isA('DateTime')"]); break;
-        default: $this->checkMethod2($field);
+        case "date": case "timestamp": case "year": case "time": $this->checkMethod($field, ["isA('DateTime')"]); break;
+        default: $this->checkMethod($field);
       }
     }
     return $this->string;  
   }
 
-  protected function checkMethod($field, $method){
-    $r = ($field->isNotNull()) ? "->required()" : "";
-    $this->string .= "  public function check{$field->getName('XxYy')}(\$value) { 
-    \$this->_logs->resetLogs(\"{$field->getName()}\");
-    if(Validation::is_undefined(\$value)) return null;
-    \$v = Validation::getInstanceValue(\$value)->{$method}(){$r};
-    foreach(\$v->getErrors() as \$error){ \$this->_logs->addLog(\"{$field->getName()}\", \"error\", \$error); }
-    return \$v->isSuccess();
-  }
-
-";
-  }
-
-  protected function defecto(Field $field){
-    ($field->isNotNull()) ? $this->notNull($field) : $this->success($field);
-  }
 
   protected function success(Field $field){
     $this->string .= "  public function check{$field->getName('XxYy')}(\$value) { 
@@ -45,7 +29,7 @@ class ClassValues_validators extends GenerateEntity {
   }
 
   
-  protected function checkMethod2($field, array $methods = []){
+  protected function checkMethod($field, array $methods = []){
     if ($field->isNotNull()) array_unshift($methods, "required()"); //required debe chequearse primero
     if(empty($methods)) return $this->success($field);
 
@@ -59,34 +43,5 @@ class ClassValues_validators extends GenerateEntity {
 
 ";
   }
-
-  protected function date(Field $field){
-    $methods = array("isA('DateTime')");
-    if ($field->isNotNull()) array_push($methods, "required()");
-    $this->string .= "  public function check{$field->getName('XxYy')}(\$value) { 
-    \$this->_logs->resetLogs(\"{$field->getName()}\");
-    if(Validation::is_undefined(\$value)) return null;
-    \$v = Validation::getInstanceValue(\$value)->required();
-    foreach(\$v->getErrors() as \$error){ \$this->_logs->addLog(\"{$field->getName()}\", \"error\", \$error); }
-    return \$v->isSuccess();
-  }
-
-";
-  }
-
-  protected function notNull(Field $field){
-    $this->string .= "  public function check{$field->getName('XxYy')}(\$value) { 
-    \$this->_logs->resetLogs(\"{$field->getName()}\");
-    if(Validation::is_undefined(\$value)) return null;
-    \$v = Validation::getInstanceValue(\$value)->required();
-    foreach(\$v->getErrors() as \$error){ \$this->_logs->addLog(\"{$field->getName()}\", \"error\", \$error); }
-    return \$v->isSuccess();
-  }
-
-";
-  }
-
-  
-
 
 }
