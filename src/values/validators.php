@@ -31,6 +31,8 @@ class ClassValues_validators extends GenerateEntity {
   
   protected function checkMethod($field, array $methods = []){
     if ($field->isNotNull()) array_unshift($methods, "required()"); //required debe chequearse primero
+    if ($l = $field->getLength()) array_push($methods, "max({$l})");
+    if ($l = $field->getMinLength()) array_push($methods, "min({$l})");
     if(empty($methods)) return $this->success($field);
 
     $this->string .= "  public function check{$field->getName('XxYy')}(\$value) { 
