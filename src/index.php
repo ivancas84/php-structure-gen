@@ -19,12 +19,6 @@ foreach($structure as $entity) {
 		case "values": values($entity); break;
         
     default:
-      apiAll($entity);
-			apiCount($entity);
-			apiGetAll($entity);			
-			apiIds($entity);			
-			apiUnique($entity);			
-			
 			doc($entity);
 			
 			sqlo($entity);
@@ -33,37 +27,6 @@ foreach($structure as $entity) {
 		break;
   }
 }
-
-function apiAll(Entity $entity){
-  require_once("api/All.php");
-  $gen = new GenControllerAll($entity);
-  $gen->generateIfNotExistsWithImp();
-}
-
-function apiCount(Entity $entity){
-  require_once("api/Count.php");
-  $gen = new GenControllerCount($entity);
-  $gen->generateIfNotExistsWithImp();
-}
-
-function apiGetAll(Entity $entity){
-  require_once("api/GetAll.php");
-  $gen = new GenControllerGetAll($entity);
-  $gen->generateIfNotExistsWithImp();
-}
-
-function apiIds(Entity $entity){
-  require_once("api/Ids.php");
-  $gen = new GenControllerIds($entity);
-  $gen->generateIfNotExistsWithImp();
-}
-
-function apiUnique(Entity $entity){
-  require_once("api/Unique.php");
-  $gen = new GenControllerUnique($entity);
-  $gen->generateIfNotExistsWithImp();
-}
-
 
 function doc(Entity $entity){
   require_once("doc/Main.php");
