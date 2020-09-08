@@ -23,11 +23,11 @@ class ClassValues_fromArray extends GenerateEntity {
     foreach ( $pkNfFk as $field ) {
       switch($field->getDataType()) {
         case "date": case "time": case "timestamp": case "year":
-          $this->string .= "    if(isset(\$row[\$p.\"" . $field->getName() . "\"])) \$this->set{$field->getName('XxYy')}(\$row[\$p.\"" . $field->getName() . "\"]);
+          $this->string .= "    if(key_exists(\$p.\"" . $field->getName() . "\", \$row)) \$this->set{$field->getName('XxYy')}(\$row[\$p.\"" . $field->getName() . "\"]);
 ";      
         break;
         default: 
-          $this->string .= "    if(isset(\$row[\$p.\"" . $field->getName() . "\"])) \$this->set{$field->getName('XxYy')}(\$row[\$p.\"" . $field->getName() . "\"]);
+          $this->string .= "    if(key_exists(\$p.\"" . $field->getName() . "\", \$row)) \$this->set{$field->getName('XxYy')}(\$row[\$p.\"" . $field->getName() . "\"]);
 ";      
       }
     }
