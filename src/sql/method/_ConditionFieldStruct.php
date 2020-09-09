@@ -104,22 +104,24 @@ class ClassSql__conditionFieldStruct extends GenerateEntity{
 	}
 
   protected function date($fieldName) {
-    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionDate(\$this->_mappingField(\$field), \$value, \$option);
+    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionDateTime(\$this->_mappingField(\$field), \$value, \$option, \"Y-m-d\");
       case \"{\$p}" . $fieldName . "_is_set\": return \$this->format->conditionIsSet(\$this->_mappingField(\"{\$p}" . $fieldName . "\"), \$value, \$option);
 
 " ;
   }
 
   protected function timestamp($fieldName) {
-    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionTimestamp(\$this->_mappingField(\$field), \$value, \$option);
-      case \"{\$p}" . $fieldName . "_date\": return \$this->format->conditionDate(\$this->_mappingField(\$field), \$value, \$option);
+    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionDateTime(\$this->_mappingField(\$field), \$value, \$option, \"Y-m-d H:i:s\");
+      case \"{\$p}" . $fieldName . "_date\": return \$this->format->conditionDateTime(\$this->_mappingField(\$field), \$value, \$option, \"Y-m-d\");
       case \"{\$p}" . $fieldName . "_is_set\": return \$this->format->conditionIsSet(\$this->_mappingField(\"{\$p}" . $fieldName . "\"), \$value, \$option);
+      case \"{\$p}" . $fieldName . "_ym\": return \$this->format->conditionDateTimeAux(\$this->_mappingField(\$field), \$value, \$option, \"Y-m\");
+      case \"{\$p}" . $fieldName . "_y\": return \$this->format->conditionDateTimeAux(\$this->_mappingField(\$field), \$value, \$option, \"Y\");
 
 " ;
   }
-
+  
   protected function time($fieldName) {
-    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionTime(\$this->_mappingField(\$field), \$value, \$option);
+    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionDateTime(\$this->_mappingField(\$field), \$value, \$option, \"H:i:s\");
     case \"{\$p}" . $fieldName . "_is_set\": return \$this->format->conditionIsSet(\$this->_mappingField(\"{\$p}" . $fieldName . "\"), \$value, \$option);
 
 " ;
