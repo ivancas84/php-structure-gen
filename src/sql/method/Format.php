@@ -52,10 +52,10 @@ protected function start(){
     //redefinir valores de timestamp y datetime. Los valores timestamp y datetime se dividen en diferentes partes correspondientes a dia mes anio hora minutos y segundos. Dichas partes deben unirse en una sola variable
     foreach ( $nf as $field ) {
       switch ( $field->getDataType()) {
-        case "timestamp": $this->timestamp($field); break;
-        case "date": $this->date($field); break;
-        case "time": $this->time($field); break;
-        case "year": $this->year($field); break;
+        case "timestamp": $this->dateTime($field, "Y-m-d H:i:s"); break;
+        case "date": $this->dateTime($field, "Y-m-d"); break;
+        case "time": $this->dateTime($field, "H:i:s"); break;
+        case "year": $this->dateTime($field, "Y"); break;
         case "text": case "string": $this->string($field); break;
         case "integer": case "float": $this->number($field); break;
         case "boolean": $this->boolean($field); break;
@@ -83,33 +83,11 @@ protected function start(){
 
   }
 
-  protected function date(Field $field){
+  protected function dateTime(Field $field, $format){
 
-    $this->string .= "    if(array_key_exists('{$field->getName()}', \$row)) \$row_['" . $field->getName() . "'] = \$this->format->date(\$row['" . $field->getName() . "']);
+    $this->string .= "    if(array_key_exists('{$field->getName()}', \$row)) \$row_['" . $field->getName() . "'] = \$this->format->dateTime(\$row['" . $field->getName() . "'], \"{$format}\");
 ";
   }
-
-  protected function time(Field $field){
-
-    $this->string .= "    if(array_key_exists('{$field->getName()}', \$row)) \$row_['" . $field->getName() . "'] = \$this->format->time(\$row['" . $field->getName() . "']);
-";
-  }
-
-  protected function timestamp(Field $field){
-
-    $this->string .= "    if(array_key_exists('{$field->getName()}', \$row)) \$row_['" . $field->getName() . "'] = \$this->format->timestamp(\$row['" . $field->getName() . "']);
-";
-  }
-
-
-
-  protected function year(Field $field){
-    $this->string .= "    if(array_key_exists('{$field->getName()}', \$row)) \$row_['" . $field->getName() . "'] = \$this->format->year(\$row['" . $field->getName() . "']);
-";
-
-  }
-
-
 
 
 
