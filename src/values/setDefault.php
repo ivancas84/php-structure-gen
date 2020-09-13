@@ -18,7 +18,7 @@ class GenValues_setDefault extends GenerateEntity {
   }
 
   public function pk(){
-    $this->string .= "    if(\$this->id == UNDEFINED) \$this->setId(uniqid());
+    $this->string .= "    if(\$this->id === UNDEFINED) \$this->setId(uniqid());
 ";
   }
 
@@ -47,20 +47,20 @@ class GenValues_setDefault extends GenerateEntity {
     } else {
       $default = "null";
     }
-    $this->string .= "    if(\$this->{$field->getName('xxYy')} == UNDEFINED) \$this->set{$field->getName('XxYy')}({$default});
+    $this->string .= "    if(\$this->{$field->getName('xxYy')} === UNDEFINED) \$this->set{$field->getName('XxYy')}({$default});
 ";
   }
 
 
   protected function withoutQuotes($field){
     $default = ($field->getDefault()) ? $field->getDefault() : "null";
-    $this->string .= "    if(\$this->{$field->getName('xxYy')} == UNDEFINED) \$this->set{$field->getName('XxYy')}({$default});
+    $this->string .= "    if(\$this->{$field->getName('xxYy')} === UNDEFINED) \$this->set{$field->getName('XxYy')}({$default});
 ";
   }
   
   protected function withQuotes($field){
     $default = ($field->getDefault()) ? "'".$field->getDefault() . "'": "null";
-    $this->string .= "    if(\$this->{$field->getName('xxYy')} == UNDEFINED) \$this->set{$field->getName('XxYy')}({$default});
+    $this->string .= "    if(\$this->{$field->getName('xxYy')} === UNDEFINED) \$this->set{$field->getName('XxYy')}({$default});
 ";
   }
 
@@ -70,7 +70,7 @@ class GenValues_setDefault extends GenerateEntity {
     } else {
       $default = ($field->getDefault()) ? "'" . $field->getDefault() . "'" : "null";
     }
-    $this->string .= "    if(\$this->{$field->getName('xxYy')} == UNDEFINED) \$this->set{$field->getName('XxYy')}({$default});
+    $this->string .= "    if(\$this->{$field->getName('xxYy')} === UNDEFINED) \$this->set{$field->getName('XxYy')}({$default});
 ";
   }
 
