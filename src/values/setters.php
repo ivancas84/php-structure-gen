@@ -23,9 +23,9 @@ class ClassValues_setters extends GenerateEntity {
     foreach ( $pkNfFk as $field ) {
 
       switch($field->getDataType()){
-        case "year": $this->dateTime($field); break;
+        case "year": $this->dateTimeAux($field); break;
         case "time": $this->dateTime($field); break;
-        case "date": $this->date($field); break;
+        case "date": $this->dateTime($field); break;
         case "timestamp": $this->dateTime($field); break;
         case "integer": $this->integer($field); break;
         case "float": $this->float($field); break;
@@ -81,20 +81,6 @@ class ClassValues_setters extends GenerateEntity {
 ";
   }
 
-  protected function date(Field $field){
-    $this->string .= "  public function _set{$field->getName('XxYy')}(DateTime \$p = null) { return \$this->{$field->getName('xxYy')} = \$p; }
-  public function set{$field->getName('XxYy')}(\$p) {
-    if(!is_null(\$p) && !(\$p instanceof DateTime)) \$p = new SpanishDateTime(\$p);
-    if(\$p instanceof DateTime) {
-      \$p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
-      \$p->setTime(0,0,0);
-    }
-    return \$this->{$field->getName('xxYy')} = \$p;
-  }
-
-";
-  }
-
   protected function dateTime(Field $field){
     $this->string .= "  public function _set{$field->getName('XxYy')}(DateTime \$p = null) { return \$this->{$field->getName('xxYy')} = \$p; }  
   public function set{$field->getName('XxYy')}(\$p) {
@@ -106,5 +92,16 @@ class ClassValues_setters extends GenerateEntity {
 ";
   }
 
+  
+  protected function dateTimeAux(Field $field){
+    $this->string .= "  public function _set{$field->getName('XxYy')}(DateTime \$p = null) { return \$this->{$field->getName('xxYy')} = \$p; }  
+  public function set{$field->getName('XxYy')}(\$p) {
+    if(!is_null(\$p) && !(\$p instanceof DateTime)) \$p = SpanishDateTime::createFromFormat('Y', \$p);
+    if(\$p instanceof DateTime) \$p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
+    return \$this->{$field->getName('xxYy')} = \$p;
+  }
+
+";
+  }
 
 }
