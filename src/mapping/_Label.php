@@ -2,7 +2,7 @@
 
 require_once("GenerateEntityRecursiveFk.php");
 
-class GenSql_mappingField_label extends GenerateEntityRecursiveFk{
+class GenMappingField_label extends GenerateEntityRecursiveFk{
 
   public $fields = [];
 
@@ -17,13 +17,14 @@ class GenSql_mappingField_label extends GenerateEntityRecursiveFk{
 
 
   protected function start(){
-    $this->string .= "      case \$p.'_label': return \"CONCAT_WS(' ', ";
+    $this->string .= "  public function label() {
+    return \"CONCAT_WS(' ', ";
   }
 
   
   protected function body(Entity $entity, $prefix) {
     $fieldsPkNf = $entity->getFieldsByType(["pk","nf"]);
-    $prf = (empty($prefix)) ? "{\$t}." : "{\$p}".$prefix.".";
+    $prf = (empty($prefix)) ? "{\$this->_pt()}." : "{\$this->_pf()}".$prefix.".";
     foreach($fieldsPkNf as $field){
       if($field->isMain()) array_push($this->fields, $prf.$field->getName()); 
     }
@@ -31,11 +32,13 @@ class GenSql_mappingField_label extends GenerateEntityRecursiveFk{
   }
 
   protected function defineFields(){
-    $this->string .= implode(", ", $this->fields);
+    $this->string .= implode(", 
+", $this->fields);
   }
 
   protected function end(){
-      $this->string .= ")\";
+      $this->string .= ")\"; 
+  }
 ";
   }
 
