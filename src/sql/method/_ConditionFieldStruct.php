@@ -122,6 +122,15 @@ class ClassSql__conditionFieldStruct extends GenerateEntity{
   
   protected function time($fieldName) {
     $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionDateTime(\$this->_mappingField(\$field), \$value, \$option, \"H:i:s\");
+    case \"{\$p}" . $fieldName . "_hm\": return \$this->format->conditionDateTime(\$this->_mappingField(\$field), \$value, \$option, \"H:i\");
+    case \"{\$p}" . $fieldName . "_is_set\": return \$this->format->conditionIsSet(\$this->_mappingField(\"{\$p}" . $fieldName . "\"), \$value, \$option);
+
+" ;
+  }
+
+  
+  protected function year($fieldName) {
+    $this->string .= "      case \"{\$p}" . $fieldName . "\": return \$this->format->conditionDateTimeAux(\$this->_mappingField(\$field), \$value, \$option, \"Y\");
     case \"{\$p}" . $fieldName . "_is_set\": return \$this->format->conditionIsSet(\$this->_mappingField(\"{\$p}" . $fieldName . "\"), \$value, \$option);
 
 " ;
