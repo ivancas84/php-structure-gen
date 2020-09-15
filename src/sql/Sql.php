@@ -11,6 +11,7 @@ class GenClassSql extends GenerateFileEntity{
   }
 
   protected function generateCode(){
+    if(!$this->getEntity()->hasRelations()) return;
     $this->start();
     $this->mappingField();
     $this->fields();
