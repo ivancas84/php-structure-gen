@@ -36,13 +36,13 @@ class Sqlo_values extends GenerateEntity { //deberia extender de GenerateEntityR
 
     $this->string .= "  public function values(array \$row){
     \$row_ = [];
-    \$row_[\"{$e}\"] = \$this->container->getValues(\"{$this->getEntity()->getName()}\")->_fromArray(\$row);
+    \$row_[\"{$e}\"] = \$this->container->getValue(\"{$this->getEntity()->getName()}\")->_fromArray(\$row, \"set\");
 ";
   }
 
 
   protected function body(Entity $entity, $prefix, $name){
-    $this->string .= "    \$row_[\"{$name}\"] = \$this->container->getValues('{$entity->getName()}')->_fromArray(\$row, '{$prefix}_');
+    $this->string .= "    \$row_[\"{$name}\"] = \$this->container->getValue('{$entity->getName()}', '{$prefix}')->_fromArray(\$row, \"set\");
 ";
   }
 

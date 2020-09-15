@@ -7,7 +7,7 @@ class Sqlo_update extends GenerateEntity{
 
 
   protected function start(){
-    $this->string .= "  protected function _update(array \$row){ //@override
+    $this->string .= "  public function _update(array \$row){ //@override
     \$sql = \"
 UPDATE \" . \$this->entity->sn_() . \" SET
 \";

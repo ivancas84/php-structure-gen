@@ -23,6 +23,7 @@ class GenClassValue extends GenerateFileEntity{
     $this->resetters();
     $this->validators();
     $this->sql();
+    $this->json();
 
     $this->end();
   }
@@ -91,6 +92,12 @@ $this->string .= "
   protected function sql(){
     require_once("value/_sql.php");
     $g = new GenValue_sql($this->getEntity());
+    $this->string .=  $g->generate();
+  }
+  
+  protected function json(){
+    require_once("value/_json.php");
+    $g = new GenValue_json($this->getEntity());
     $this->string .=  $g->generate();
   }
 }
