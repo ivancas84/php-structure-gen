@@ -16,14 +16,21 @@ foreach($structure as $entity) {
 		//model
 		case "sqlo": sqlo($entity); break;
 		case "sql": sql($entity); break;
-		case "values": values($entity); break;
-        
+    case "mapping": mapping($entity); break;
+    case "condition": condition($entity); break;
+    case "field_alias": fieldAlias($entity); break;
+    case "value": value($entity); break;
+
     default:
 			doc($entity);
 			
 			sqlo($entity);
 			sql($entity);
-			values($entity);
+      
+      mapping($entity);
+      condition($entity);
+      fieldAlias($entity);
+      value($entity);
 		break;
   }
 }
@@ -46,8 +53,26 @@ function sql(Entity $entity){
   $gen->generate();
 }
 
-function values(Entity $entity){
-  require_once("values/Values.php");
-  $gen = new GenClassValues($entity);
+function mapping(Entity $entity){
+  require_once("mapping/Mapping.php");
+  $gen = new GenClassMapping($entity);
+  $gen->generate();
+}
+
+function condition(Entity $entity){
+  require_once("condition/Condition.php");
+  $gen = new GenClassCondition($entity);
+  $gen->generate();
+}
+
+function fieldAlias(Entity $entity){
+  require_once("fieldAlias/FieldAlias.php");
+  $gen = new GenClassFieldAlias($entity);
+  $gen->generate();
+}
+
+function value(Entity $entity){
+  require_once("value/Value.php");
+  $gen = new GenClassValue($entity);
   $gen->generate();
 }

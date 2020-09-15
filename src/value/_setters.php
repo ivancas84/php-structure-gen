@@ -1,15 +1,11 @@
 <?php
 
-class ClassValues_setters extends GenerateEntity {
+class GenValue_setters extends GenerateEntity {
 
   public function generate(){
-    $this->string .= "
-";
     $this->pk();
     $this->nf();
     $this->fk();
-    $this->string .= "
-";
     return $this->string;
   }
 

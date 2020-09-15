@@ -1,7 +1,7 @@
 <?php
 
 
-class ClassValues_getters extends GenerateEntity {
+class GenValue_getters extends GenerateEntity {
 
 
    public function generate(){
@@ -21,7 +21,8 @@ class ClassValues_getters extends GenerateEntity {
 
        }
      }
-     return $this->string;
+     return $this->string . "
+";
 
     }
 

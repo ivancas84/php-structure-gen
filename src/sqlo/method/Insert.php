@@ -19,7 +19,7 @@ class Sqlo_insert extends GenerateEntity {
 
 
   protected function start(){
-      $this->string .= "  protected function _insert(array \$row){ //@override
+      $this->string .= "  public function insert(array \$row){ //@override
       \$sql = \"
   INSERT INTO \" . \$this->entity->sn_() . \" (\";
   ";

@@ -18,8 +18,6 @@ class GenClassSqlo extends GenerateFileEntity {
     $this->insert();
     $this->update();
     $this->json();
-    //$this->uploadSql(); //@todo deprecated
-    //$this->uploadSqlIndex(); //@todo deprecated
     $this->values(); //@todo deprecated
     $this->end();
   }
@@ -67,19 +65,7 @@ class _" . $this->getEntity()->getName("XxYy") . "Sqlo extends EntitySqlo {
 }
 " ;
   }
-
-
-  protected function uploadSql(){
-    require_once("sqlo/method/UploadSql.php");
-    $gen = new GenerateClassDataSqlMethodUploadSql($this->getEntity());
-    $this->string .= $gen->generate();
-  }
-
-  protected function uploadSqlIndex(){
-    require_once("sqlo/method/UploadSqlIndex.php");
-    $this->string .= GenerateClassDataSqlMethodUploadSqlIndex::createAndGetString($this->getEntity());
-  }
-
+  
   protected function values(){
     require_once("sqlo/method/Values.php");
     $gen = new Sqlo_values($this->getEntity());

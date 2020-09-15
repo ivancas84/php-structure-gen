@@ -1,7 +1,7 @@
 <?php
 
 
-class ClassValues_validators extends GenerateEntity {
+class GenValue_validators extends GenerateEntity {
 
 
   public function generate(){
@@ -20,8 +20,8 @@ class ClassValues_validators extends GenerateEntity {
 
 
   protected function success(Field $field){
-    $this->string .= "  public function check{$field->getName('XxYy')}(\$value) { 
-      if(Validation::is_undefined(\$value)) return null;
+    $this->string .= "  public function check{$field->getName('XxYy')}() { 
+      if(Validation::is_undefined(\$this->{$field->getName('xxYy')})) return null;
       return true; 
   }
 
@@ -35,10 +35,10 @@ class ClassValues_validators extends GenerateEntity {
     if ($l = $field->getMinLength()) array_push($methods, "min({$l})");
     if(empty($methods)) return $this->success($field);
 
-    $this->string .= "  public function check{$field->getName('XxYy')}(\$value) { 
+    $this->string .= "  public function check{$field->getName('XxYy')}() { 
     \$this->_logs->resetLogs(\"{$field->getName()}\");
-    if(Validation::is_undefined(\$value)) return null;
-    \$v = Validation::getInstanceValue(\$value)->" . implode("->", $methods). ";
+    if(Validation::is_undefined(\$this->{$field->getName('xxYy')})) return null;
+    \$v = Validation::getInstanceValue(\$this->{$field->getName('xxYy')})->" . implode("->", $methods). ";
     foreach(\$v->getErrors() as \$error){ \$this->_logs->addLog(\"{$field->getName()}\", \"error\", \$error); }
     return \$v->isSuccess();
   }

@@ -1,7 +1,7 @@
 <?php
 
 
-class GenValues_resetters extends GenerateEntity {
+class GenValue_resetters extends GenerateEntity {
 
 
    public function generate(){
@@ -14,9 +14,9 @@ class GenValues_resetters extends GenerateEntity {
 
        }
      }
-     $this->string .= "
+     
+     return $this->string . "
 ";
-     return $this->string;
 
     }
 

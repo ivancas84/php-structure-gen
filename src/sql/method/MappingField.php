@@ -6,12 +6,12 @@ class ClassSql_mappingField extends GenerateEntityRecursiveFk {
 
   protected function start(){
     $this->string .= "  public function mappingField(\$field){
-    if(\$f = \$this->_mappingField(\$field)) return \$f;
+    if(\$f = \$this->container->getMapping(\$this->entity->getName())->_eval(\$field)) return \$f;
 ";
 }
 
   protected function body(Entity $entity, $prefix) {
-    $this->string .= "    if(\$f = \$this->container->getSql('{$entity->getName()}', '" . $prefix . "')->_mappingField(\$field)) return \$f;
+    $this->string .= "    if(\$f = \$this->container->getMapping('{$entity->getName()}', '" . $prefix . "')->_eval(\$field)) return \$f;
 ";
   }
 
