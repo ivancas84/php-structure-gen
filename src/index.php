@@ -20,7 +20,7 @@ foreach($structure as $entity) {
     case "mapping": mapping($entity); break;
     case "condition": condition($entity); break;
     case "field_alias": fieldAlias($entity); break;
-    case "sql_format": sqlFormat($entity); break;
+    case "value": value($entity); break;
 
     default:
 			doc($entity);
@@ -32,7 +32,7 @@ foreach($structure as $entity) {
       mapping($entity);
       condition($entity);
       fieldAlias($entity);
-      sqlFormat($entity);
+      value($entity);
 		break;
   }
 }
@@ -79,8 +79,8 @@ function fieldAlias(Entity $entity){
   $gen->generate();
 }
 
-function sqlFormat(Entity $entity){
-  require_once("sqlFormat/SqlFormat.php");
-  $gen = new GenClassSqlFormat($entity);
+function value(Entity $entity){
+  require_once("value/Value.php");
+  $gen = new GenClassValue($entity);
   $gen->generate();
 }
