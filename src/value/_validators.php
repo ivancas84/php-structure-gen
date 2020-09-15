@@ -37,8 +37,8 @@ class GenValue_validators extends GenerateEntity {
 
     $this->string .= "  public function check{$field->getName('XxYy')}() { 
     \$this->_logs->resetLogs(\"{$field->getName()}\");
-    if(Validation::is_undefined(\$this->{$field->getName('XxYy')})) return null;
-    \$v = Validation::getInstanceValue(\$this->{$field->getName('XxYy')})->" . implode("->", $methods). ";
+    if(Validation::is_undefined(\$this->{$field->getName('xxYy')})) return null;
+    \$v = Validation::getInstanceValue(\$this->{$field->getName('xxYy')})->" . implode("->", $methods). ";
     foreach(\$v->getErrors() as \$error){ \$this->_logs->addLog(\"{$field->getName()}\", \"error\", \$error); }
     return \$v->isSuccess();
   }

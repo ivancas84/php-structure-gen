@@ -35,12 +35,12 @@ class GenValue_sql extends GenerateEntity {
   }
 
   protected function number(Field $field){
-    $this->string .= "  public function sql{$field->getName('XxYy')}() { return \$this->_sqlNumber(\$this->{$field->getName('XxYy')}); }
+    $this->string .= "  public function sql{$field->getName('XxYy')}() { return \$this->_sqlNumber(\$this->{$field->getName('xxYy')}); }
 ";
   }
 
   protected function text(Field $field){
-    $this->string .= "  public function sql{$field->getName('XxYy')}() { return \$this->_sqlString(\$this->{$field->getName('XxYy')}); }
+    $this->string .= "  public function sql{$field->getName('XxYy')}() { return \$this->_sqlString(\$this->{$field->getName('xxYy')}); }
 ";
   }
 
