@@ -3,7 +3,6 @@
 
 class GenValue_validators extends GenerateEntity {
 
-
   public function generate(){
     $this->success($this->getEntity()->getPk());
     $pkNfFk = $this->getEntity()->getFieldsByType(["nf", "fk"]);
@@ -17,7 +16,6 @@ class GenValue_validators extends GenerateEntity {
     }
     return $this->string;  
   }
-
 
   protected function success(Field $field){
     $this->string .= "  public function check{$field->getName('XxYy')}() { 

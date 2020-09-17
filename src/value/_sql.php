@@ -39,22 +39,22 @@ class GenValue_sql extends GenerateEntity {
 
 
   protected function dateTime(Field $field, $format, $sufix = ""){
-    $this->string .= "  public function sql{$field->getName('XxYy')}{$sufix}() { return \$this->_sqlDateTime(\$this->{$field->getName('xxYy')}, \"{$format}\"); }
+    $this->string .= "  public function sql{$field->getName('XxYy')}{$sufix}() { return \$this->sql->dateTime(\$this->{$field->getName('xxYy')}, \"{$format}\"); }
 ";
   }
 
   protected function boolean(Field $field){
-    $this->string .= "  public function sql{$field->getName('XxYy')}() { return \$this->_sqlBoolean(\$this->{$field->getName('xxYy')}); }
+    $this->string .= "  public function sql{$field->getName('XxYy')}() { return \$this->sql->boolean(\$this->{$field->getName('xxYy')}); }
 ";
   }
 
   protected function number(Field $field){
-    $this->string .= "  public function sql{$field->getName('XxYy')}() { return \$this->_sqlNumber(\$this->{$field->getName('xxYy')}); }
+    $this->string .= "  public function sql{$field->getName('XxYy')}() { return \$this->sql->Number(\$this->{$field->getName('xxYy')}); }
 ";
   }
 
   protected function text(Field $field){
-    $this->string .= "  public function sql{$field->getName('XxYy')}() { return \$this->_sqlString(\$this->{$field->getName('xxYy')}); }
+    $this->string .= "  public function sql{$field->getName('XxYy')}() { return \$this->sql->string(\$this->{$field->getName('xxYy')}); }
 ";
   }
 

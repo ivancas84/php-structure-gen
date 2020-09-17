@@ -90,21 +90,20 @@ class _" .  $this->getEntity()->getName("XxYy") . "Condition extends ConditionEn
   public function boolean($field, $sufix = ""){
     $this->string .= "  public function {$field->getName('xxYy')}{$sufix}(\$option, \$value) { 
     \$field = \$this->mapping->{$field->getName('xxYy')}{$sufix}();
-    if(\$c = \$this->_exists(\$field, \$option, \$value)) return \$c;
+    if(\$c = \$this->sql->exists(\$field, \$option, \$value)) return \$c;
     \$this->value->set{$field->getName('XxYy')}{$sufix}(\$value);
     if(!\$this->value->check{$field->getName('XxYy')}{$sufix}()) throw new Exception(\"Valor incorrecto: {$field->getName('Xx Yy')} {$sufix}\");
     return \"({\$field} {\$option} {\$this->value->sql{$field->getName('XxYy')}{$sufix}()})\";  
   }
   
 ";
-}
-
+ }
 
   public function _condition($field, $sufix = ""){
     $this->string .= "  public function {$field->getName('xxYy')}{$sufix}(\$option, \$value) { 
     \$field = \$this->mapping->{$field->getName('xxYy')}{$sufix}();
-    if(\$c = \$this->_exists(\$field, \$option, \$value)) return \$c;
-    if(\$c = \$this->_approxCast(\$field, \$option, \$value)) return \$c;
+    if(\$c = \$this->sql->exists(\$field, \$option, \$value)) return \$c;
+    if(\$c = \$this->sql->approxCast(\$field, \$option, \$value)) return \$c;
     \$this->value->set{$field->getName('XxYy')}{$sufix}(\$value);
     if(!\$this->value->check{$field->getName('XxYy')}{$sufix}()) throw new Exception(\"Valor incorrecto: {$field->getName('Xx Yy')} {$sufix}\");
     return \"({\$field} {\$option} {\$this->value->sql{$field->getName('XxYy')}{$sufix}()})\";  
@@ -116,8 +115,8 @@ class _" .  $this->getEntity()->getName("XxYy") . "Condition extends ConditionEn
   public function _date($field, $sufix = ""){
     $this->string .= "  public function {$field->getName('xxYy')}{$sufix}(\$option, \$value) { 
     \$field = \$this->mapping->{$field->getName('xxYy')}{$sufix}();
-    if(\$c = \$this->_exists(\$field, \$option, \$value)) return \$c;
-    if(\$c = \$this->_approxCast(\$field, \$option, \$value)) return \$c;
+    if(\$c = \$this->sql->exists(\$field, \$option, \$value)) return \$c;
+    if(\$c = \$this->sql->approxCast(\$field, \$option, \$value)) return \$c;
     \$this->value->set{$field->getName('XxYy')}(\$value);
     if(!\$this->value->check{$field->getName('XxYy')}()) throw new Exception(\"Valor incorrecto: {$field->getName('Xx Yy')} {$sufix}\");
     return \"({\$field} {\$option} {\$this->value->sql{$field->getName('XxYy')}{$sufix}()})\";  
@@ -129,8 +128,8 @@ class _" .  $this->getEntity()->getName("XxYy") . "Condition extends ConditionEn
   public function _year($field){
     $this->string .= "  public function {$field->getName('xxYy')}Y(\$option, \$value) { 
     \$field = \$this->mapping->{$field->getName('xxYy')}Y();
-    if(\$c = \$this->_exists(\$field, \$option, \$value)) return \$c;
-    if(\$c = \$this->_approxCast(\$field, \$option, \$value)) return \$c;
+    if(\$c = \$this->sql->exists(\$field, \$option, \$value)) return \$c;
+    if(\$c = \$this->sql->approxCast(\$field, \$option, \$value)) return \$c;
     \$this->value->set{$field->getName('XxYy')}Y(\$value);
     if(!\$this->value->check{$field->getName('XxYy')}()) throw new Exception(\"Valor incorrecto: {$field->getName('Xx Yy')} Y\");
     return \"({\$field} {\$option} {\$this->value->sql{$field->getName('XxYy')}Y()})\";  
@@ -142,8 +141,8 @@ class _" .  $this->getEntity()->getName("XxYy") . "Condition extends ConditionEn
   public function _text($field){
     $this->string .= "  public function {$field->getName('xxYy')}(\$option, \$value) { 
     \$field = \$this->mapping->{$field->getName('xxYy')}();
-    if(\$c = \$this->_exists(\$field, \$option, \$value)) return \$c;
-    if(\$c = \$this->_approx(\$field, \$option, \$value)) return \$c;
+    if(\$c = \$this->sql->exists(\$field, \$option, \$value)) return \$c;
+    if(\$c = \$this->sql->approx(\$field, \$option, \$value)) return \$c;
     \$this->value->set{$field->getName('XxYy')}(\$value);
     if(!\$this->value->check{$field->getName('XxYy')}()) throw new Exception(\"Valor incorrecto: {$field->getName('Xx Yy')}\");
     return \"({\$field} {\$option} {\$this->value->sql{$field->getName('XxYy')}()})\";  
@@ -151,7 +150,6 @@ class _" .  $this->getEntity()->getName("XxYy") . "Condition extends ConditionEn
 
 ";
   }
-
 
   public function _isSet($field){
     $this->string .= "  public function {$field->getName('xxYy')}IsSet(\$option, \$value) { 
