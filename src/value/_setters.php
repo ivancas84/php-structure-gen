@@ -19,10 +19,25 @@ class GenValue_setters extends GenerateEntity {
     foreach ( $pkNfFk as $field ) {
 
       switch($field->getDataType()){
-        case "year": $this->dateTimeAux($field); break;
-        case "time": $this->dateTime($field); break;
-        case "date": $this->dateTime($field); break;
-        case "timestamp": $this->dateTime($field); break;
+        case "year": 
+          $this->_dateTime($field);
+          $this->year($field); 
+        break;
+        case "time": 
+          $this->_dateTime($field);
+          $this->dateTime($field);
+        break;
+        case "date": 
+          $this->_dateTime($field);
+          $this->dateTime($field); 
+          $this->year($field, "Y");
+        break;
+        case "timestamp": 
+          $this->_dateTime($field);
+          $this->dateTime($field);
+          $this->year($field, "Y");
+
+        break;
         case "integer": $this->integer($field); break;
         case "float": $this->float($field); break;
         case "boolean": $this->boolean($field); break;
@@ -77,22 +92,27 @@ class GenValue_setters extends GenerateEntity {
 ";
   }
 
-  protected function dateTime(Field $field){
+  protected function _dateTime(Field $field){
     $this->string .= "  public function _set{$field->getName('XxYy')}(DateTime \$p = null) { return \$this->{$field->getName('xxYy')} = \$p; }  
-  public function set{$field->getName('XxYy')}(\$p) {
+
+";
+  }
+
+  protected function dateTime(Field $field, $sufix = ""){
+    $this->string .= "  public function set{$field->getName('XxYy')}{$sufix}(\$p) {
     if(!is_null(\$p) && !(\$p instanceof DateTime)) \$p = new SpanishDateTime(\$p);
     if(\$p instanceof DateTime) \$p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
-    return \$this->{$field->getName('xxYy')} = \$p;
+    return \$this->{$field->getName('xxYy')}{$sufix} = \$p;
   }
 
 ";
   }
 
-  
-  protected function dateTimeAux(Field $field){
-    $this->string .= "  public function _set{$field->getName('XxYy')}(DateTime \$p = null) { return \$this->{$field->getName('xxYy')} = \$p; }  
-  public function set{$field->getName('XxYy')}(\$p) {
-    if(!is_null(\$p) && !(\$p instanceof DateTime)) \$p = SpanishDateTime::createFromFormat('Y', \$p);
+  protected function year(Field $field, $sufix = ""){
+    $this->string .= "  public function set{$field->getName('XxYy')}{$sufix}(\$p) {
+    if(!is_null(\$p) && !(\$p instanceof DateTime)) {
+      \$p = (strlen(\$p) == 4) ? SpanishDateTime::createFromFormat('Y', \$p) : new SpanishDateTime(\$p);
+    }
     if(\$p instanceof DateTime) \$p->setTimeZone(new DateTimeZone(date_default_timezone_get()));
     return \$this->{$field->getName('xxYy')} = \$p;
   }
