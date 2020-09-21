@@ -1,14 +1,13 @@
 <?php
 
 require_once("../config/config.php");
-
-require_once("class/model/entity/structure.php");
-
 require_once("class/tools/Filter.php");
+require_once("class/Container.php");
+
 
 $generate = Filter::get("gen");
-
-foreach($structure as $entity) {
+$container = new Container();
+foreach($container->getStructure() as $entity) {
   switch($generate){
 		//doc
 		case "doc": doc($entity); break;

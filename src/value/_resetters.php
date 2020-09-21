@@ -5,7 +5,7 @@ class GenValue_resetters extends GenerateEntity {
 
 
    public function generate(){
-     $pkNfFk = $this->getEntity()->getFieldsNf();
+     $pkNfFk = $this->getEntity()->getFields();
 
      foreach ( $pkNfFk as $field ) {
 
