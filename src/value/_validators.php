@@ -11,6 +11,7 @@ class GenValue_validators extends GenerateEntity {
 
       switch($field->getDataType()){
         case "date": case "timestamp": case "year": case "time": $this->date($field); break;
+        case "boolean"; $this->boolean($field); break;
         default: $this->checkMethod($field);
       }
     }
@@ -38,13 +39,18 @@ class GenValue_validators extends GenerateEntity {
   ";
   }
 
+  protected function boolean($field){
+    $methods = ["boolean()"];
+    $this->_check($field, $methods);
+  }
+
+  
   protected function date($field){
     /**
      * Similar a checkMethod pero se omiten las longitudes
      */
     $methods = ["isA('DateTime')"];
     if ($field->isNotNull()) array_unshift($methods, "required()"); //required debe chequearse primero
-    if(empty($methods)) return $this->success($field);
     $this->_check($field, $methods);
     
   }
@@ -53,7 +59,8 @@ class GenValue_validators extends GenerateEntity {
     if ($field->isNotNull()) array_unshift($methods, "required()"); //required debe chequearse primero
     if ($l = $field->getLength()) array_push($methods, "max({$l})");
     if ($l = $field->getMinLength()) array_push($methods, "min({$l})");
-    if(empty($methods)) return $this->success($field);
+    if(empty($methods)) return;
+    //$this->success($field);
     $this->_check($field, $methods);
   }
 
