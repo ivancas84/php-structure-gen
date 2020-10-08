@@ -153,7 +153,7 @@ class _" .  $this->getEntity()->getName("XxYy") . "Condition extends ConditionEn
 
   public function _isSet($field){
     $this->string .= "  public function {$field->getName('xxYy')}IsSet(\$option, \$value) { 
-    return \$this->_exists(\$this->mapping->{$field->getName('xxYy')}(), \$option, settypebool(\$value));
+    return \$this->sql->exists(\$this->mapping->{$field->getName('xxYy')}(), \$option, settypebool(\$value));
   }
 
 ";
