@@ -15,8 +15,6 @@ class GenClassSqlo extends GenerateFileEntity {
   protected function generateCode(){
     $this->start();
     $this->construct();
-    $this->insert();
-    $this->update();
     $this->json();
     $this->values(); //@todo deprecated
     $this->end();
@@ -39,18 +37,6 @@ class _" . $this->getEntity()->getName("XxYy") . "Sqlo extends EntitySqlo {
   public \$entityName = \"{$this->getEntity()->getName()}\";
 
 ";
-  }
-
-  protected function insert(){
-    require_once("sqlo/method/Insert.php");
-    $g = new Sqlo_insert($this->getEntity());
-    $this->string .=  $g->generate();
-  }
-
-  protected function update(){
-    require_once("sqlo/method/Update.php");
-    $gen = new Sqlo_update($this->getEntity());
-    $this->string .= $gen->generate();
   }
 
   protected function json(){
