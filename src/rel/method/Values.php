@@ -2,7 +2,7 @@
 
 require_once("GenerateEntity.php");
 
-class Sqlo_values extends GenerateEntity { //deberia extender de GenerateEntityRecursiveFk pero modifica algunos metodos
+class Rel_values extends GenerateEntity { //deberia extender de GenerateEntityRecursiveFk pero modifica algunos metodos
 
   protected $names = [];
   

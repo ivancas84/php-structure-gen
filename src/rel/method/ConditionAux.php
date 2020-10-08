@@ -3,7 +3,7 @@
 
 require_once("GenerateEntityRecursiveFk.php");
 
-class ClassSql_conditionFieldAux extends GenerateEntityRecursiveFk{
+class Rel_conditionAux extends GenerateEntityRecursiveFk{
 
 
 

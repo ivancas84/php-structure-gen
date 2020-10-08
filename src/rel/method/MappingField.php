@@ -2,7 +2,7 @@
 
 require_once("GenerateEntityRecursiveFk.php");
 
-class ClassSql_mappingField extends GenerateEntityRecursiveFk {
+class Rel_mappingField extends GenerateEntityRecursiveFk {
 
   protected function start(){
     $this->string .= "  public function mappingField(\$field){

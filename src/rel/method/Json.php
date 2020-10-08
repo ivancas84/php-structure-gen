@@ -2,7 +2,7 @@
 
 require_once("GenerateEntity.php");
 
-class Sqlo_json extends GenerateEntity {
+class Rel_json extends GenerateEntity {
 
    public function generate(){
     if (!$this->entity->hasRelations()) return;

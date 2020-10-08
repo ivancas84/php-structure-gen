@@ -2,7 +2,7 @@
 
 require_once("GenerateEntityRecursiveFk.php");
 
-class Sql_fields extends GenerateEntityRecursiveFk {
+class Rel_fields extends GenerateEntityRecursiveFk {
   public $fields = [];
 
   protected function start(){

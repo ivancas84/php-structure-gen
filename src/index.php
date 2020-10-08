@@ -12,9 +12,8 @@ foreach($container->getStructure() as $entity) {
 		//doc
 		case "doc": doc($entity); break;
 		
-		//model
-		case "sqlo": sqlo($entity); break;
-		case "sql": sql($entity); break;
+		//model		
+    case "rel": rel($entity); break;
     case "mapping": mapping($entity); break;
     case "condition": condition($entity); break;
     case "field_alias": fieldAlias($entity); break;
@@ -23,8 +22,7 @@ foreach($container->getStructure() as $entity) {
     default:
 			doc($entity);
 			
-			sqlo($entity);
-			sql($entity);
+      rel($entity);
       
       mapping($entity);
       condition($entity);
@@ -40,17 +38,12 @@ function doc(Entity $entity){
   $gen->generate();
 }
 
-function sqlo(Entity $entity){
-  require_once("sqlo/Sqlo.php");
-  $gen = new GenClassSqlo($entity);
+function rel(Entity $entity){
+  require_once("rel/Rel.php");
+  $gen = new GenClassRel($entity);
   $gen->generate();
 }
 
-function sql(Entity $entity){
-  require_once("sql/Sql.php");
-  $gen = new GenClassSql($entity);
-  $gen->generate();
-}
 
 function mapping(Entity $entity){
   require_once("mapping/Mapping.php");

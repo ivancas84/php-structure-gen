@@ -2,7 +2,7 @@
 
 require_once("GenerateEntity.php");
 
-class ClassSql_join extends GenerateEntity {
+class Rel_join extends GenerateEntity {
 
   public function generate(){
     if(!$this->getEntity()->hasRelationsFk()) return "";
