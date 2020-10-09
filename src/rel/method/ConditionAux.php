@@ -3,13 +3,13 @@
 
 require_once("GenerateEntityRecursiveFk.php");
 
-class ClassSql_conditionFieldAux extends GenerateEntityRecursiveFk{
+class Rel_conditionAux extends GenerateEntityRecursiveFk{
 
 
 
   protected function start(){
-    $this->string .= "  protected function conditionFieldAux(\$field, \$option, \$value) {
-    if(\$c = \$this->container->getConditionAux(\$this->entity->getName())->_eval(\$field, [\$option, \$value])) return \$c;
+    $this->string .= "  public function conditionAux(\$field, \$option, \$value) {
+    if(\$c = \$this->container->getConditionAux(\$this->entityName)->_eval(\$field, [\$option, \$value])) return \$c;
 ";
   }
 

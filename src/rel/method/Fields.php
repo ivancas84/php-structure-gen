@@ -2,12 +2,12 @@
 
 require_once("GenerateEntityRecursiveFk.php");
 
-class Sql_fields extends GenerateEntityRecursiveFk {
+class Rel_fields extends GenerateEntityRecursiveFk {
   public $fields = [];
 
   protected function start(){
     $this->string .= "  public function fields(){
-    return implode(\",\", \$this->container->getFieldAlias(\$this->entity->getName())->_toArray()) . ',
+    return implode(\",\", \$this->container->getFieldAlias(\$this->entityName)->_toArray()) . ',
 ' . ";
   }
 
