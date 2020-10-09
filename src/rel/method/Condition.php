@@ -8,8 +8,8 @@ class Rel_condition extends GenerateEntityRecursiveFk{
 
 
   protected function start(){
-    $this->string .= "  protected function conditionFieldStruct(\$field, \$option, \$value) {
-    if(\$c = \$this->container->getCondition(\$this->entity->getName())->_eval(\$field, [\$option, \$value])) return \$c;
+    $this->string .= "  public function condition(\$field, \$option, \$value) {
+    if(\$c = \$this->container->getCondition(\$this->entityName)->_eval(\$field, [\$option, \$value])) return \$c;
 ";
   }
 

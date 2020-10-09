@@ -15,7 +15,7 @@ class Rel_json extends GenerateEntity {
   protected function start(){
     $this->string .= "  public function json(array \$row = null){
     if(empty(\$row)) return null;
-    \$row_ = \$this->container->getValue(\$this->entity->getName())->_fromArray(\$row, \"set\")->_toArray(\"json\");
+    \$row_ = \$this->container->getValue(\$this->entityName)->_fromArray(\$row, \"set\")->_toArray(\"json\");
 ";
   }
 

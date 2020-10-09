@@ -13,13 +13,13 @@ class GenClassRel extends GenerateFileEntity{
   protected function generateCode(){
     if(!$this->getEntity()->hasRelations()) return;
     $this->start();
-    $this->mappingField();
+    $this->mapping();
     $this->fields();
     $this->methodJoin();
     $this->condition();
     $this->conditionAux();
     $this->json();
-    $this->values();
+    $this->value();
     $this->end();
   }
 
@@ -40,9 +40,9 @@ class _" .  $this->getEntity()->getName("XxYy") . "Rel extends EntityRel{
   }
 
 
-  protected function mappingField(){
-    require_once("rel/method/MappingField.php");
-    $gen = new Rel_mappingField($this->getEntity());
+  protected function mapping(){
+    require_once("rel/method/Mapping.php");
+    $gen = new Rel_mapping($this->getEntity());
     $this->string .= $gen->generate();
   }
 
@@ -78,9 +78,9 @@ class _" .  $this->getEntity()->getName("XxYy") . "Rel extends EntityRel{
   }
 
   
-  protected function values(){
-    require_once("rel/method/Values.php");
-    $gen = new Rel_values($this->getEntity());
+  protected function value(){
+    require_once("rel/method/Value.php");
+    $gen = new Rel_value($this->getEntity());
     $this->string .= $gen->generate();
 
   }

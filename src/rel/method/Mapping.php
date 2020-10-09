@@ -2,11 +2,11 @@
 
 require_once("GenerateEntityRecursiveFk.php");
 
-class Rel_mappingField extends GenerateEntityRecursiveFk {
+class Rel_mapping extends GenerateEntityRecursiveFk {
 
   protected function start(){
-    $this->string .= "  public function mappingField(\$field){
-    if(\$f = \$this->container->getMapping(\$this->entity->getName())->_eval(\$field)) return \$f;
+    $this->string .= "  public function mapping(\$field){
+    if(\$f = \$this->container->getMapping(\$this->entityName)->_eval(\$field)) return \$f;
 ";
 }
 
@@ -16,7 +16,7 @@ class Rel_mappingField extends GenerateEntityRecursiveFk {
   }
 
   protected function end(){
-  $this->string .= "    throw new Exception(\"Campo no reconocido para {\$this->entity->getName()}: {\$field}\");
+  $this->string .= "    throw new Exception(\"Campo no reconocido para {\$this->entityName}: {\$field}\");
   }
 
 ";

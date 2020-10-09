@@ -7,7 +7,7 @@ class Rel_fields extends GenerateEntityRecursiveFk {
 
   protected function start(){
     $this->string .= "  public function fields(){
-    return implode(\",\", \$this->container->getFieldAlias(\$this->entity->getName())->_toArray()) . ',
+    return implode(\",\", \$this->container->getFieldAlias(\$this->entityName)->_toArray()) . ',
 ' . ";
   }
 
