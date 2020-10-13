@@ -13,11 +13,7 @@ class GenClassRel extends GenerateFileEntity{
   protected function generateCode(){
     if(!$this->getEntity()->hasRelations()) return;
     $this->start();
-    $this->mapping();
-    $this->fields();
-    $this->methodJoin();
-    $this->condition();
-    $this->conditionAux();
+    $this->join();
     $this->json();
     $this->value();
     $this->end();
@@ -40,36 +36,11 @@ class _" .  $this->getEntity()->getName("XxYy") . "Rel extends EntityRel{
   }
 
 
-  protected function mapping(){
-    require_once("rel/method/Mapping.php");
-    $gen = new Rel_mapping($this->getEntity());
-    $this->string .= $gen->generate();
-  }
-
-  protected function fields(){
-    require_once("rel/method/Fields.php");
-    $gen = new Rel_fields($this->getEntity());
-    $this->string .= $gen->generate();
-  }
-
-  protected function methodJoin(){
+  protected function join(){
     require_once("rel/method/Join.php");
     $gen = new Rel_join($this->getEntity());
     $this->string .= $gen->generate();
   }
-
-  protected function condition(){
-    require_once("rel/method/Condition.php");
-    $gen = new Rel_condition($this->getEntity());
-    $this->string .= $gen->generate();
-  }
-
-  protected function conditionAux(){
-    require_once("rel/method/ConditionAux.php");
-    $gen = new Rel_conditionAux($this->getEntity());
-    $this->string .= $gen->generate();
-  }
-
 
   protected function json(){
     require_once("rel/method/Json.php");

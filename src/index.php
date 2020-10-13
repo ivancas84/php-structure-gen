@@ -5,31 +5,22 @@ require_once("class/tools/Filter.php");
 require_once("class/Container.php");
 
 
-$generate = Filter::get("gen");
 $container = new Container();
-foreach($container->getStructure() as $entity) {
-  switch($generate){
-		//doc
-		case "doc": doc($entity); break;
-		
-		//model		
-    case "rel": rel($entity); break;
-    case "mapping": mapping($entity); break;
-    case "condition": condition($entity); break;
-    case "field_alias": fieldAlias($entity); break;
-    case "value": value($entity); break;
 
-    default:
-			doc($entity);
-			
-      rel($entity);
-      
-      mapping($entity);
-      condition($entity);
-      fieldAlias($entity);
-      value($entity);
-		break;
-  }
+getEntityRelations();
+foreach($container->getStructure() as $entity) {
+  doc($entity);
+  rel($entity);
+  mapping($entity);
+  condition($entity);
+  fieldAlias($entity);
+  value($entity);      
+}
+
+function getEntityRelations(){
+  require_once("function/GetEntityRelations.php");
+  $gen = new GenFunctionGetEntityRelations();
+  $gen->generate();
 }
 
 function doc(Entity $entity){
