@@ -8,9 +8,10 @@ require_once("class/Container.php");
 $container = new Container();
 
 getEntityRelations();
+getEntityTree();
+
 foreach($container->getStructure() as $entity) {
   doc($entity);
-  rel($entity);
   mapping($entity);
   condition($entity);
   fieldAlias($entity);
@@ -23,18 +24,17 @@ function getEntityRelations(){
   $gen->generate();
 }
 
+function getEntityTree(){
+  require_once("function/getEntityTree/GetEntityTree.php");
+  $gen = new GenFunctionGetEntityTree();
+  $gen->generate();
+}
+
 function doc(Entity $entity){
   require_once("doc/Main.php");
   $gen = new Doc($entity);
   $gen->generate();
 }
-
-function rel(Entity $entity){
-  require_once("rel/Rel.php");
-  $gen = new GenClassRel($entity);
-  $gen->generate();
-}
-
 
 function mapping(Entity $entity){
   require_once("mapping/Mapping.php");
