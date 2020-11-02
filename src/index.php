@@ -9,6 +9,7 @@ $container = new Container();
 
 getEntityRelations();
 getEntityTree();
+publicScope();
 
 foreach($container->getStructure() as $entity) {
   doc($entity);
@@ -28,6 +29,12 @@ function getEntityTree(){
   require_once("function/getEntityTree/GetEntityTree.php");
   $gen = new GenFunctionGetEntityTree();
   $gen->generate();
+}
+
+function publicScope(){
+  require_once("function/publicScope/publicScope.php");
+  $gen = new GenFunctionPublicScope();
+  $gen->generateIfNotExists();
 }
 
 function doc(Entity $entity){
