@@ -53,11 +53,6 @@ function condition(Entity $entity){
   $gen->generate();
 }
 
-function fieldAlias(Entity $entity){
-  require_once("fieldAlias/FieldAlias.php");
-  $gen = new GenClassFieldAlias($entity);
-  $gen->generate();
-}
 
 function value(Entity $entity){
   require_once("value/Value.php");
