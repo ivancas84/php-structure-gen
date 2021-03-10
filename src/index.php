@@ -7,6 +7,7 @@ require_once("class/Container.php");
 $container = new Container();
 
 getEntityRelations();
+getEntityRel();
 getEntityTree();
 publicScope();
 
@@ -17,9 +18,22 @@ foreach($container->getStructure() as $entity) {
   //value($entity);      
 }
 
+function getEntityFk(){
+  require_once("function/GetEntityFk.php");
+  $gen = new GetEntityFk();
+  $gen->generate();
+}
+
 function getEntityRelations(){
   require_once("function/GetEntityRelations.php");
   $gen = new GenFunctionGetEntityRelations();
+  $gen->generate();
+}
+
+
+function getEntityRel(){
+  require_once("function/getEntityRel/GetEntityRel.php");
+  $gen = new GetEntityRel();
   $gen->generate();
 }
 

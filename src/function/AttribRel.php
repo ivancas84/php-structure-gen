@@ -11,7 +11,7 @@ class EntityRelations_attribRel extends GenerateEntityRecursiveFk{
   }
 
 
-  protected function body(Entity $entity, $prefix){
+  protected function body(Entity $entity, $prefix, Field $field = null){
     $this->string .= "      '{$prefix}' => '{$entity->getName()}',
 ";
   }
