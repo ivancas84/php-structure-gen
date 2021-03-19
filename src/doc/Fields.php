@@ -1,7 +1,6 @@
 <?php
 
 
-require_once("GenerateEntityRecursiveFk.php");
 
 class Doc_fields extends GenerateEntity{
 

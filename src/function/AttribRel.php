@@ -12,6 +12,7 @@ class EntityRelations_attribRel extends GenerateEntityRecursiveFk{
 
 
   protected function body(Entity $entity, $prefix, Field $field = null){
+    $prefix = (empty($prefix))? $field->getAlias() : $prefix."_".$field->getAlias();
     $this->string .= "      '{$prefix}' => '{$entity->getName()}',
 ";
   }

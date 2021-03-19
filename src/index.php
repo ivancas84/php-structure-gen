@@ -13,9 +13,6 @@ publicScope();
 
 foreach($container->getStructure() as $entity) {
   doc($entity);
-  //mapping($entity);
-  //condition($entity);
-  //value($entity);      
 }
 
 function getEntityFk(){
