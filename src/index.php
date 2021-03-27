@@ -1,21 +1,27 @@
 <?php
 
 require_once("../config/config.php");
-require_once("class/tools/Filter.php");
 require_once("class/Container.php");
 
 
 $container = new Container();
 
 getEntityRelations();
+getEntityRel();
 getEntityTree();
+publicScope();
 
 foreach($container->getStructure() as $entity) {
   doc($entity);
-  mapping($entity);
-  condition($entity);
-  fieldAlias($entity);
-  value($entity);      
+  //mapping($entity);
+  //condition($entity);
+  //value($entity);      
+}
+
+function getEntityFk(){
+  require_once("function/GetEntityFk.php");
+  $gen = new GetEntityFk();
+  $gen->generate();
 }
 
 function getEntityRelations(){
@@ -24,10 +30,23 @@ function getEntityRelations(){
   $gen->generate();
 }
 
+
+function getEntityRel(){
+  require_once("function/getEntityRel/GetEntityRel.php");
+  $gen = new GetEntityRel();
+  $gen->generate();
+}
+
 function getEntityTree(){
   require_once("function/getEntityTree/GetEntityTree.php");
   $gen = new GenFunctionGetEntityTree();
   $gen->generate();
+}
+
+function publicScope(){
+  require_once("function/publicScope/publicScope.php");
+  $gen = new GenFunctionPublicScope();
+  $gen->generateIfNotExists();
 }
 
 function doc(Entity $entity){
@@ -48,11 +67,6 @@ function condition(Entity $entity){
   $gen->generate();
 }
 
-function fieldAlias(Entity $entity){
-  require_once("fieldAlias/FieldAlias.php");
-  $gen = new GenClassFieldAlias($entity);
-  $gen->generate();
-}
 
 function value(Entity $entity){
   require_once("value/Value.php");
