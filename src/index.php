@@ -6,7 +6,6 @@ require_once("class/Container.php");
 
 $container = new Container();
 
-getEntityRelations();
 getEntityRel();
 getEntityTree();
 publicScope();
@@ -20,13 +19,6 @@ function getEntityFk(){
   $gen = new GetEntityFk();
   $gen->generate();
 }
-
-function getEntityRelations(){
-  require_once("function/GetEntityRelations.php");
-  $gen = new GenFunctionGetEntityRelations();
-  $gen->generate();
-}
-
 
 function getEntityRel(){
   require_once("function/getEntityRel/GetEntityRel.php");
