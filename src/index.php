@@ -14,11 +14,6 @@ foreach($container->getStructure() as $entity) {
   doc($entity);
 }
 
-function getEntityFk(){
-  require_once("function/GetEntityFk.php");
-  $gen = new GetEntityFk();
-  $gen->generate();
-}
 
 function getEntityRel(){
   require_once("function/getEntityRel/GetEntityRel.php");
@@ -44,21 +39,7 @@ function doc(Entity $entity){
   $gen->generate();
 }
 
-function mapping(Entity $entity){
-  require_once("mapping/Mapping.php");
-  $gen = new GenClassMapping($entity);
-  $gen->generate();
-}
-
-function condition(Entity $entity){
-  require_once("condition/Condition.php");
-  $gen = new GenClassCondition($entity);
-  $gen->generate();
-}
 
 
-function value(Entity $entity){
-  require_once("value/Value.php");
-  $gen = new GenClassValue($entity);
-  $gen->generate();
-}
+
+
