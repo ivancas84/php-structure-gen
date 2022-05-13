@@ -11,7 +11,7 @@ class Doc_relations extends GenerateEntityRecursiveFk{
 
 
   protected function body(Entity $entity, $prefix, Field $field = null){
-    $prefix = (empty($prefix))? $field->getAlias() : $prefix;
+    $prefix = (empty($prefix)) ? $field->getAlias() : $prefix . "_" . $field->getAlias();
     $this->string .= "{$entity->getName()} - {$prefix}
 ";
   }
