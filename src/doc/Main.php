@@ -32,9 +32,9 @@ class Doc extends GenerateFileEntity {
 
   protected function uniqueMultiple(){
     
-    if(empty($fields = $this->getEntity()->getFieldsUniqueMultiple())) return "";
+    if(empty($fields = $this->getEntity()->uniqueMultiple)) return "";
     $func = function($field) {
-      return $field->getName();
+      return $field;
     };
 
     $this->string .= "

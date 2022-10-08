@@ -1,5 +1,6 @@
 <?php
 
+require_once("GenerateEntity.php");
 
 class GetEntityRelElement extends GenerateEntity {
   protected $names = [];
