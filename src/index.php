@@ -6,12 +6,26 @@ require_once("class/Container.php");
 
 $container = new Container();
 
+entityTreeJson();
+entityRelJson();
 getEntityRel();
 getEntityTree();
 publicScope();
 
 foreach($container->getStructure() as $entity) {
   doc($entity);
+}
+
+function entityTreeJson(){
+  require_once("function/entityTreeJson/EntityTreeJson.php");
+  $gen = new EntityTreeJson();
+  $gen->generate();
+}
+
+function entityRelJson(){
+  require_once("function/entityRelJson/EntityRelJson.php");
+  $gen = new EntityRelJson();
+  $gen->generate();
 }
 
 
