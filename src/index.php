@@ -8,8 +8,6 @@ $container = new Container();
 
 entityTreeJson();
 entityRelJson();
-getEntityRel();
-getEntityTree();
 publicScope();
 
 foreach($container->getStructure() as $entity) {
@@ -28,18 +26,6 @@ function entityRelJson(){
   $gen->generate();
 }
 
-
-function getEntityRel(){
-  require_once("function/getEntityRel/GetEntityRel.php");
-  $gen = new GetEntityRel();
-  $gen->generate();
-}
-
-function getEntityTree(){
-  require_once("function/getEntityTree/GetEntityTree.php");
-  $gen = new GenFunctionGetEntityTree();
-  $gen->generate();
-}
 
 function publicScope(){
   require_once("function/publicScope/publicScope.php");
