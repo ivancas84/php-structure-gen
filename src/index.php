@@ -10,10 +10,6 @@ entityTreeJson();
 entityRelJson();
 publicScope();
 
-foreach($container->getStructure() as $entity) {
-  doc($entity);
-}
-
 function entityTreeJson(){
   require_once("function/entityTreeJson/EntityTreeJson.php");
   $gen = new EntityTreeJson();
